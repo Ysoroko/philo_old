@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:04:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/16 16:36:43 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/16 16:39:29 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ static int	ft_main_args_error(int argc, char **argv)
 }
 
 /*
-** Each program should have the same options: number_of_philosophers time_to_die
-** time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat
 ** 1 - number of philosophers
 ** 2 - time to die
 ** 3 - time to eat
