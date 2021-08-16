@@ -6,11 +6,11 @@
 #    By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/16 12:05:15 by ysoroko           #+#    #+#              #
-#    Updated: 2021/08/16 14:51:16 by ysoroko          ###   ########.fr        #
+#    Updated: 2021/08/16 16:23:05 by ysoroko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	philosophers
+NAME	=	philo
 
 EXECUTABLE = philo
 
@@ -44,12 +44,16 @@ CLEANED		=	echo "\n💧 $(BOLD_YELLOW)Clean: $(NO_COLOR)Removed all the \".o\" f
 
 FCLEANED	=	echo "\n🧼 $(BOLD_YELLOW)Fclean: $(NO_COLOR)Removed the executables \n"
 
+COMPILED = echo "\n📖 $(BOLD_PURPLE)Executable $(BOLD_CYAN)\"$(EXECUTABLE)\" $(BOLD_PURPLE)created and ready for use!\n$(NO_COLOR)"
+
 # ------------------------------ Rules ------------------------------
 
 all:	$(NAME)
 
 $(NAME): $(OBJS)
-		$(GCC) $(FLAGS) $(OBJS) -o $(EXECUTABLE)
+		@$(COMP_START)
+		@$(GCC) $(FLAGS) $(OBJS) -o $(EXECUTABLE)
+		@$(COMPILED)
 
 clean:
 		@rm -rf $(OBJS)
@@ -62,6 +66,6 @@ fclean: clean
 re:		fclean all
 
 .c.o:
-	${GCC} ${FLAGS} -c $< -o ${<:.c=.o}
+	@${GCC} ${FLAGS} -c $< -o ${<:.c=.o}
 
 .PHONY:	all clean fclean re
