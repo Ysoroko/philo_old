@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:04:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/16 14:01:04 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/16 16:36:43 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,16 @@ static int	ft_main_args_error(int argc, char **argv)
 	if (argc > 6 || argc < 5)
 		return (ft_puterr("Wrong number of arguments"));
 	i = 0;
-	j = -1;
 	while (++i < argc)
 	{
-		if (!ft_strchrset(argv[i], BASE_TEN))
-			return (ft_puterr("Found non numerical input"));
+		j = -1;
+		while (argv[i][++j])
+		{
+			if (!ft_strchr(BASE_TEN, argv[i][j]))
+				return (ft_puterr("Found non numerical input"));
+		}
 		if (ft_atol(argv[i]) <= 0 || ft_atol(argv[i]) > INT_MAX)
-			return (ft_puterr("Only integer values are accepted"));
+			return (ft_puterr("Outside integers in range [1 ; 2147483647]"));
 	}
 	return (0);
 }
