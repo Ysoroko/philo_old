@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:43:38 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/16 11:46:34 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/16 13:54:16 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,33 @@ char	*ft_strchrset(char *str, char *charset)
 			return (found);
 	}
 	return (0);
+}
+
+int	ft_isnum(char c)
+{
+	if (ft_strchr(BASE_TEN, c))
+		return (1);
+	return (0);
+}
+
+long	ft_atol(char *str)
+{
+	int		i;
+	long	ret;
+	int		sign;
+
+	i = 0;
+	ret = 0;
+	sign = 1;
+	if (str[0] == '-')
+	{
+		sign = -1;
+		i++;
+	}
+	while (str[i] && ft_isnum(str[i]))
+	{
+		ret = ret * 10 + (str[i] - '0');
+		i++;
+	}
+	return (ret * sign);
 }

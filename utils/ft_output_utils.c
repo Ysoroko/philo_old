@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:24:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/16 11:59:57 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/16 13:57:05 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,10 @@ int	ft_puterr(char *str)
 	int	i;
 
 	if (!str)
-		return ;
+		return (-1);
 	i = -1;
 	ft_putstr_fd(BOLDRED, STDERR);
+	ft_putstr_fd("Error:\t", STDERR);
 	while (str[++i])
 	{
 		ft_putchar_fd(str[i], STDERR);

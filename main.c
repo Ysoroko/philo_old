@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:04:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/16 12:04:35 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/16 13:53:13 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static int	ft_main_args_error(int argc, char **argv)
 	while (++i < argc)
 	{
 		if (!ft_strchrset(argv[i], BASE_TEN))
-			return ("Found bad input. Only numerical values are accepted");
-		if (ft_atol(argv[i]) <= 0 || ft_atol(argv[i] > INT_MAX))
+			return (ft_puterr("Found bad input. Only numerical values are accepted"));
+		if (ft_atol(argv[i]) <= 0 || ft_atol(argv[i]) > INT_MAX)
 			return (ft_puterr("Only integer values are accepted"));
 	}
 	return (0);
@@ -50,7 +50,7 @@ static int	ft_main_args_error(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	if (ft_main_args_error)
+	if (ft_main_args_error(argc, argv))
 		return (-1);
 	ft_putstr_fd("All good, moving on\n", STDOUT);
 	return (0);

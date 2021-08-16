@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:20:51 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/16 12:00:06 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/16 13:54:26 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char	*ft_strchr(char *str, int c);
 char	*ft_strchrset(char *str, char *charset);
 
 long	ft_atol(char *str);
+int		ft_isnum(char c);
 
 /*
 ** MACROS
