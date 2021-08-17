@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:04:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/17 16:09:16 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/17 16:23:13 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,21 @@ static int	ft_main_args_error(int argc, char **argv)
 	return (0);
 }
 
-/// Transforms the arguments of our program into integers and stores the values
-/// inside the corresponding elements of our t_main_args structure.
-/// Number of times to eat before stopping is left at 0 if not specified.
-static void	ft_initialize_main_args(t_main_args *m_args, int argc, char **argv)
+/// Create a new t_main_args structure using malloc and set up its values.
+/// Returns NULL pointer if the malloc call fails
+static t_main_args	*ft_initialize_main_args_struct(int argc, char **argv)
 {
-	m_args->n_philos = (int)(ft_atol(argv[1]));
-	m_args->t_to_die = (int)(ft_atol(argv[2]));
-	m_args->t_to_eat = (int)(ft_atol(argv[3]));
-	m_args->t_to_sleep  = (int)(ft_atol(argv[4]));
+	t_main_args	*ret;
+
+	ret = malloc(sizeof(t_main_args));
+	if (!ret)
+		return (NULL);
+	ret->n_philos = (int)(ft_atol(argv[1]));
+	ret->t_to_die = (int)(ft_atol(argv[2]));
+	ret->t_to_eat = (int)(ft_atol(argv[3]));
+	ret->t_to_sleep  = (int)(ft_atol(argv[4]));
 	if (argc == 6)
-		m_args->n_to_eat = (int)(ft_atol(argv[5]));
+		ret->n_to_eat = (int)(ft_atol(argv[5]));
 }
 
 /*
@@ -66,9 +70,8 @@ int	main(int argc, char **argv)
 
 	if (ft_main_args_error(argc, argv))
 		return (-1);
-	main_args = ft_new_main_args();
+	main_args = ft_initialize_main_args_struct(argc, argv);
 	if (!main_args)
 		return (ft_puterr("Call to malloc function returned a NULL pointer"));
-	ft_initialize_main_args(main_args, argc, argv);
 	return (0);
 }
