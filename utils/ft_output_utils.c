@@ -6,17 +6,21 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:24:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/16 14:00:37 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/17 15:50:19 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philosophers.h"
 
+/// Displays the char argument.
+/// Uses the specified file descriptor for output.
 void	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
 }
 
+/// Displays the string argument.
+/// Uses the specified file descriptor for output.
 void	ft_putstr_fd(char *str, int fd)
 {
 	int	i;
@@ -30,6 +34,8 @@ void	ft_putstr_fd(char *str, int fd)
 	}
 }
 
+/// Displays the string argument followed by a newline character.
+/// Uses the specified file descriptor for output.
 void	ft_putendl_fd(char *str, int fd)
 {
 	int	i;
@@ -44,6 +50,7 @@ void	ft_putendl_fd(char *str, int fd)
 	ft_putchar_fd('\n', fd);
 }
 
+/// Displays the integer n argument on the specified file descriptor
 void	ft_putnbr_fd(int n, int fd)
 {
 	unsigned int	m;
@@ -65,6 +72,7 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 }
 
+/// Displays "Error" followed by its argument on STDERR (in red color)
 int	ft_puterr(char *str)
 {
 	int	i;

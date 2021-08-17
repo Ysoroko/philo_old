@@ -6,12 +6,15 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:43:38 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/16 16:37:24 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/17 15:53:16 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philosophers.h"
 
+/// Checks if character c (int argument) is present is str string argument.
+/// Returns the adress of the first occurence of c in str if it's found.
+/// Returns a NULL pointer if c isn't present in str.
 char	*ft_strchr(char *str, int c)
 {
 	int		i;
@@ -34,6 +37,7 @@ char	*ft_strchr(char *str, int c)
 	return (0);
 }
 
+/// Returns 1 if the character c argument is a digit, 0 otherwise.
 int	ft_isnum(char c)
 {
 	if (ft_strchr(BASE_TEN, c))
@@ -41,6 +45,8 @@ int	ft_isnum(char c)
 	return (0);
 }
 
+/// Converts the string str to a long number and returns this number
+/// Returns 0 if str is composed of non-digit characters.
 long	ft_atol(char *str)
 {
 	int		i;
