@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:20:51 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/16 16:41:13 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/17 15:38:41 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,31 @@
 
 # include <stdio.h>
 # include <unistd.h>
+# include <pthread.h>
+
+/*
+** STRUCTURES
+*/
+
+typedef struct s_main_args
+{
+	int	n_philos;
+	int	t_to_die;
+	int	t_to_sleep;
+	int	t_to_eat;
+	int	n_to_eat;
+}	t_main_args;
+
+
+/*
+** MACROS
+*/
+
+# define STDIN 0
+# define STDOUT 1
+# define STDERR 2
+# define BASE_TEN "0123456789"
+# define INT_MAX 2147483647
 
 /*
 ** PROTOTYPES
@@ -32,19 +57,7 @@ char	*ft_strchrset(char *str, char *charset);
 long	ft_atol(char *str);
 int		ft_isnum(char c);
 
-/*
-** MACROS
-*/
-
-# define STDIN 0
-# define STDOUT 1
-# define STDERR 2
-# define BASE_TEN "0123456789"
-# define INT_MAX 2147483647
-
-# define EATING 1
-# define SLEEPING 2
-# define THINKING 3
+t_main_args	*ft_new_main_args(void);
 
 /*
 ** COLORS
