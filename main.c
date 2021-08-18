@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:04:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/18 11:50:13 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/18 14:32:52 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static t_main_args	*ft_initialize_main_args_struct(int argc, char **argv)
 	return (ret);
 }
 
-static void	*ft_thread_create_function(void *arg)
+void	*ft_thread_create_function(void *arg)
 {
 	printf("Bonjour\n");
 	return (arg);
@@ -101,8 +101,8 @@ static pthread_t	*ft_initialize_threads(int n_philos)
 
 int	main(int argc, char **argv)
 {
-	pthread_t	*philosophers;
 	t_main_args	*main_args;
+	pthread_t	*philosophers;
 
 	if (ft_main_args_error(argc, argv))
 		return (-1);
@@ -110,5 +110,7 @@ int	main(int argc, char **argv)
 	if (!main_args)
 		return (ft_puterr("Call to malloc function returned a NULL pointer"));
 	philosophers = ft_initialize_threads(main_args->n_philos);
+	if (!main_args)
+		return (ft_puterr("Couldn't initialize threads"));
 	return (0);
 }

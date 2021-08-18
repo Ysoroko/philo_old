@@ -6,7 +6,7 @@
 #    By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/16 12:05:15 by ysoroko           #+#    #+#              #
-#    Updated: 2021/08/17 15:38:39 by ysoroko          ###   ########.fr        #
+#    Updated: 2021/08/18 14:34:45 by ysoroko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ FLAGS	=	-Wall -Wextra -Werror
 UTILS	=	utils/ft_output_utils.c \
 			utils/ft_strings_utils.c \
 			utils/ft_structure_utils.c \
+
+PHILOS	=	philosophers/ft_threads_create.c \
 
 SRC		=	$(UTILS) \
 			main.c \

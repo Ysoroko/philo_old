@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:20:51 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/18 11:08:01 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/18 14:33:55 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ typedef struct s_main_args
 	int	n_to_eat;
 }	t_main_args;
 
+typedef struct s_philo
+{
+	int	n_seconds;
+	int	state;
+	int	n_seconds_without_eating;
+}	t_philo;
+
 /*
 ** MACROS
 */
@@ -66,6 +73,8 @@ int			ft_isnum(char c);
 
 t_main_args	*ft_new_main_args(void);
 void		ft_print_main_args(t_main_args *main_args);
+
+void		*ft_thread_create_function(void *arg);
 
 /*
 ** COLORS
