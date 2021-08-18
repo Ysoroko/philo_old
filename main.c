@@ -6,12 +6,11 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:04:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/17 16:23:13 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/18 11:50:13 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
 
 /// Check the arguments of our program for errors.
 /// Returns 1 and displays the corresponding error message if an error is found
@@ -39,7 +38,7 @@ static int	ft_main_args_error(int argc, char **argv)
 }
 
 /// Create a new t_main_args structure using malloc and set up its values.
-/// Returns NULL pointer if the malloc call fails
+/// Returns a NULL pointer if the malloc call fails
 static t_main_args	*ft_initialize_main_args_struct(int argc, char **argv)
 {
 	t_main_args	*ret;
@@ -53,6 +52,43 @@ static t_main_args	*ft_initialize_main_args_struct(int argc, char **argv)
 	ret->t_to_sleep  = (int)(ft_atol(argv[4]));
 	if (argc == 6)
 		ret->n_to_eat = (int)(ft_atol(argv[5]));
+	return (ret);
+}
+
+static void	*ft_thread_create_function(void *arg)
+{
+	printf("Bonjour\n");
+	return (arg);
+}
+
+/// Initialize an array of threads of n_philos elements with malloc
+/// Creates a thread for every philosopher and joins the threads
+static pthread_t	*ft_initialize_threads(int n_philos)
+{
+	pthread_t	*ret;
+	int			i;
+
+	ret = malloc(sizeof(*ret) * n_philos);
+	if (!ret)
+		return (NULL);
+	i = -1;
+	while (++i < n_philos)
+	{
+		if (pthread_create(&(ret[i]), NULL, &ft_thread_create_function, NULL))
+		{
+			ft_puterr("Failed to create a thread");
+			return (NULL);
+		}
+	}
+	while (--i > 0)
+	{
+		if (pthread_join(ret[i], NULL))
+		{
+			ft_puterr("Failed to join a thread");
+			return (NULL);
+		}
+	}
+	return (ret);
 }
 
 /*
@@ -65,7 +101,7 @@ static t_main_args	*ft_initialize_main_args_struct(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	//pthread_t	thread;
+	pthread_t	*philosophers;
 	t_main_args	*main_args;
 
 	if (ft_main_args_error(argc, argv))
@@ -73,5 +109,6 @@ int	main(int argc, char **argv)
 	main_args = ft_initialize_main_args_struct(argc, argv);
 	if (!main_args)
 		return (ft_puterr("Call to malloc function returned a NULL pointer"));
+	philosophers = ft_initialize_threads(main_args->n_philos);
 	return (0);
 }
