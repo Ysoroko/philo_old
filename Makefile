@@ -6,7 +6,7 @@
 #    By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/16 12:05:15 by ysoroko           #+#    #+#              #
-#    Updated: 2021/08/18 14:34:45 by ysoroko          ###   ########.fr        #
+#    Updated: 2021/08/19 10:06:16 by ysoroko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,10 @@ UTILS	=	utils/ft_output_utils.c \
 			utils/ft_strings_utils.c \
 			utils/ft_structure_utils.c \
 
-PHILOS	=	philosophers/ft_threads_create.c \
+PHILOS	=	philosophers/ft_thread_function.c \
 
 SRC		=	$(UTILS) \
+			$(PHILOS) \
 			main.c \
 
 OBJS	=	$(SRC:.c=.o)

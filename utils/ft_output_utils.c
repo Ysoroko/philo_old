@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:24:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/17 15:50:19 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/18 15:39:26 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,20 +73,14 @@ void	ft_putnbr_fd(int n, int fd)
 }
 
 /// Displays "Error" followed by its argument on STDERR (in red color)
+/// Returns -1 if str argument is a NULL pointer or 1 otherwise
 int	ft_puterr(char *str)
 {
-	int	i;
-
 	if (!str)
 		return (-1);
-	i = -1;
 	ft_putstr_fd(BOLDRED, STDERR);
 	ft_putendl_fd("Error:\t", STDERR);
-	while (str[++i])
-	{
-		ft_putchar_fd(str[i], STDERR);
-	}
-	ft_putchar_fd('\n', STDERR);
+	ft_putendl_fd(str, STDERR);
 	ft_putstr_fd(COLOR_RESET, STDERR);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:43:38 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/18 12:03:10 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/18 15:39:38 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,17 @@ long	ft_atol(char *str)
 		i++;
 	}
 	return (ret * sign);
+}
+
+/// Displays "Error" followed by its argument on STDERR (in red color)
+/// Returns a NULL pointer
+void	*ft_puterr_ptr(char *str)
+{
+	if (!str)
+		return (NULL);
+	ft_putstr_fd(BOLDRED, STDERR);
+	ft_putendl_fd("Error:\t", STDERR);
+	ft_putendl_fd(str, STDERR);
+	ft_putstr_fd(COLOR_RESET, STDERR);
+	return (NULL);
 }

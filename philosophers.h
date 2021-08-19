@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:20:51 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/18 14:33:55 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/19 10:06:01 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_main_args
 	int	t_to_sleep;
 	int	t_to_eat;
 	int	n_to_eat;
+	int	current_philo;
 }	t_main_args;
 
 typedef struct s_philo
@@ -64,17 +65,16 @@ void		ft_putstr_fd(char *str, int fd);
 void		ft_putendl_fd(char *str, int fd);
 void		ft_putnbr_fd(int n, int fd);
 int			ft_puterr(char *str);
-
+void		*ft_puterr_ptr(char *str);
 char		*ft_strchr(char *str, int c);
 char		*ft_strchrset(char *str, char *charset);
-
 long		ft_atol(char *str);
 int			ft_isnum(char c);
 
 t_main_args	*ft_new_main_args(void);
 void		ft_print_main_args(t_main_args *main_args);
 
-void		*ft_thread_create_function(void *arg);
+void		*ft_thread_function(void *arg);
 
 /*
 ** COLORS
