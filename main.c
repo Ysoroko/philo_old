@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:04:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/19 10:06:27 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/19 11:27:42 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static t_main_args	*ft_initialize_main_args_struct(int argc, char **argv)
 
 /// Initialize an array of threads of n_philos elements with malloc
 /// Creates a thread for every philosopher and joins the threads
+/// Returns a NULL pointer in case of an error
 static pthread_t	*ft_initialize_threads(t_main_args *main_args)
 {
 	pthread_t	*ret;
@@ -69,8 +70,9 @@ static pthread_t	*ft_initialize_threads(t_main_args *main_args)
 	i = -1;
 	while (++i < main_args->n_philos)
 	{
-		main_args->current_philo = i;
-		if (pthread_create(&(ret[i]), NULL, &ft_thread_function, main_args))
+		int	*n = malloc(sizeof(int));
+		*n = i;
+		if (pthread_create(&(ret[i]), NULL, &ft_thread_function, n))
 			return (ft_puterr_ptr("Failed to create a thread"));
 	}
 	while (--i > 0)
@@ -100,7 +102,7 @@ int	main(int argc, char **argv)
 	if (!main_args)
 		return (ft_puterr("Call to malloc function returned a NULL pointer"));
 	philosophers = ft_initialize_threads(main_args);
-	if (!main_args)
+	if (!philosophers)
 		return (ft_puterr("Couldn't initialize threads"));
 	return (0);
 }

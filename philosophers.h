@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:20:51 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/19 10:06:01 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/19 11:35:37 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <pthread.h>
+# include <sys/time.h>
 
 /*
 ** STRUCTURES
@@ -36,14 +37,19 @@ typedef struct s_main_args
 	int	t_to_sleep;
 	int	t_to_eat;
 	int	n_to_eat;
-	int	current_philo;
+	int	*current_philo;
 }	t_main_args;
 
 typedef struct s_philo
 {
-	int	n_seconds;
-	int	state;
+	int	t_to_die;
+	int	t_to_sleep;
+	int	t_to_eat;
+	int	n_to_eat;
+	int	start_time;
+	int	current_time;
 	int	n_seconds_without_eating;
+	int	state;
 }	t_philo;
 
 /*
