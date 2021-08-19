@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:20:51 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/19 11:35:37 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/19 11:52:32 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_main_args
 
 typedef struct s_philo
 {
+	int	philo_number;
 	int	t_to_die;
 	int	t_to_sleep;
 	int	t_to_eat;
@@ -78,6 +79,7 @@ long		ft_atol(char *str);
 int			ft_isnum(char c);
 
 t_main_args	*ft_new_main_args(void);
+t_philo		*ft_initialize_philo(t_main_args *main_args, int number);
 void		ft_print_main_args(t_main_args *main_args);
 
 void		*ft_thread_function(void *arg);
