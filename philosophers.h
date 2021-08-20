@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:20:51 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/20 12:03:50 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/20 15:33:10 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,11 @@ typedef struct s_philo
 # define STDERR 2
 # define BASE_TEN "0123456789"
 # define INT_MAX 2147483647
+# define EATING 1
+# define TOOK_A_FORK 2
+# define THINKING 3
+# define SLEEPING 4
+# define DIED 5
 
 /*
 ** PROTOTYPES
@@ -84,7 +89,13 @@ t_main_args	*ft_new_main_args(void);
 t_philo		*ft_initialize_philo(t_main_args *main_args, int number);
 
 void		*ft_thread_function(void *arg);
+
 int			ft_setup_start_time(t_philo *philo);
+int			ft_get_current_time(t_philo *philo);
+
+void		ft_eat(t_philo *philo);
+int			ft_sleep(t_philo *philo);
+int			ft_think(t_philo *philo);
 
 /*
 ** DEBUG

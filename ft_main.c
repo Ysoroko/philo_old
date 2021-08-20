@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:04:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/20 14:53:27 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/20 14:58:38 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ static t_main_args	*ft_initialize_main_args_struct(int argc, char **argv)
 	return (ret);
 }
 
+/// This function creates a mutex for every fork and assigns 2 forks to
+/// every philosopher, both shared with neighbours.
+/// Returns 0 in case of success or -1 in case of an error
 static int	ft_initialize_forks(t_philo *ph, int n, t_philo *prev, t_philo *f)
 {
 	pthread_mutex_t	*left_fork;
@@ -79,10 +82,6 @@ static int	ft_initialize_forks(t_philo *ph, int n, t_philo *prev, t_philo *f)
 	}
 	return (0);
 }
-
-// 1: L = b80 R = c00
-// 2: L = c00 R = c80
-// 3: L = c80 R = b80
 
 /// Initialize an array of threads of n_philos elements with malloc
 /// Creates a thread for every philosopher and joins the threads
