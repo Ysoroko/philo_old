@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:04:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/20 11:53:15 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/20 14:53:27 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ static int	ft_initialize_forks(t_philo *ph, int n, t_philo *prev, t_philo *f)
 	else if (ph->philo_number == n)
 	{
 		ph->left_fork = left_fork;
-		f->right_fork = left_fork;
+		ph->right_fork = f->left_fork;
+		prev->right_fork = left_fork;
 	}
 	else
 	{
@@ -78,6 +79,10 @@ static int	ft_initialize_forks(t_philo *ph, int n, t_philo *prev, t_philo *f)
 	}
 	return (0);
 }
+
+// 1: L = b80 R = c00
+// 2: L = c00 R = c80
+// 3: L = c80 R = b80
 
 /// Initialize an array of threads of n_philos elements with malloc
 /// Creates a thread for every philosopher and joins the threads
