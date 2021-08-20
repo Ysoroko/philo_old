@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 15:32:17 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/20 12:03:27 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/20 16:02:23 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,45 @@ void	ft_print_philo(t_philo	*philo)
 }
 
 /// Creates a new t_philo structure and assigns its values
-t_philo	*ft_initialize_philo(t_main_args *main_args, int number)
+t_philo	*ft_initialize_philo(t_main_args *args, int n, t_philo **f)
 {
 	t_philo	*ret;
 
 	ret = malloc(sizeof(t_philo));
 	if (!ret)
 		return (NULL);
-	ret->philo_number = number;
-	ret->t_to_die = main_args->t_to_die;
-	ret->t_to_sleep = main_args->t_to_sleep;
-	ret->t_to_eat = main_args->n_to_eat;
+	ret->philo_number = n;
+	ret->t_to_die = args->t_to_die;
+	ret->t_to_sleep = args->t_to_sleep;
+	ret->t_to_eat = args->n_to_eat;
 	ret->n_to_eat = 0;
-	if (main_args->n_to_eat)
-		ret->n_to_eat = main_args->n_to_eat;
+	if (args->n_to_eat)
+		ret->n_to_eat = args->n_to_eat;
 	ret->n_times_ate = 0;
 	ret->start_time = 0;
 	ret->current_time = 0;
 	ret->n_seconds_without_eating = 0;
 	ret->state = 0;
+	if (!(n - 1))
+		*f = ret;
 	return (ret);
+}
+
+/// Frees to_free argument, displays error_msg argument and returns to_return
+void	*ft_free(void *to_free, char *error_msg, void *to_return)
+{
+	free(to_free);
+	if (error_msg)
+		ft_puterr(error_msg);
+	return (to_return);
+}
+
+/// Mallocs size bytes at *malloc_this memory adress
+/// Returns the return value of malloc call
+void	*ft_malloc(int size, void **malloc_this)
+{
+	if (!malloc_this)
+		return (NULL);
+	*malloc_this = malloc(size);
+	return (malloc_this);
 }
