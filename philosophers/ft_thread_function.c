@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 14:32:41 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/20 10:35:18 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/20 11:50:57 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,18 @@ static void	ft_philo_routine(t_philo *philo)
 	}
 }
 
+/// Function called to cleanup the memory
+static int	ft_cleanup_threads_and_mutexes(t_philo *philo)
+{
+	if (pthread_mutex_destroy(philo->left_fork))
+	{
+		free(philo);
+		return (-1);
+	}
+	free(philo);
+	return (0);
+}
+
 /// Function called when creating a new thread
 void	*ft_thread_function(void *arg)
 {
@@ -43,6 +55,7 @@ void	*ft_thread_function(void *arg)
 	if (ft_setup_start_time(philo) == -1)
 		return (NULL);
 	ft_philo_routine(philo);
-	free(arg);
+	if (!arg)
+		ft_cleanup_threads_and_mutexes(arg);
 	return (arg);
 }

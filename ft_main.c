@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:04:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/20 11:09:31 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/20 11:53:15 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,30 @@ static t_main_args	*ft_initialize_main_args_struct(int argc, char **argv)
 	return (ret);
 }
 
+static int	ft_initialize_forks(t_philo *ph, int n, t_philo *prev, t_philo *f)
+{
+	pthread_mutex_t	*left_fork;
+
+	left_fork = malloc(sizeof(*left_fork));
+	if (!left_fork)
+		return (ft_puterr("Failed to malloc a mutex fork"));
+	if (pthread_mutex_init(left_fork, NULL))
+		return (ft_puterr("Failed to initialize a mutex for the fork"));
+	if (!prev)
+		ph->left_fork = left_fork;
+	else if (ph->philo_number == n)
+	{
+		ph->left_fork = left_fork;
+		f->right_fork = left_fork;
+	}
+	else
+	{
+		ph->left_fork = left_fork;
+		prev->right_fork = left_fork;
+	}
+	return (0);
+}
+
 /// Initialize an array of threads of n_philos elements with malloc
 /// Creates a thread for every philosopher and joins the threads
 /// Returns a NULL pointer in case of an error
@@ -62,19 +86,27 @@ static pthread_t	*ft_initialize_threads(t_main_args *main_args)
 {
 	pthread_t	*ret;
 	t_philo		*philo;
+	t_philo		*prev;
+	t_philo		*first;
 	int			i;
 
 	ret = malloc(sizeof(*ret) * main_args->n_philos);
 	if (!ret)
-		return (NULL);
+		return (ft_puterr_ptr("Failed to malloc the philosophers"));
 	i = -1;
+	prev = NULL;
 	while (++i < main_args->n_philos)
 	{
 		philo = ft_initialize_philo(main_args, i + 1);
 		if (!philo)
-			return (ft_puterr_ptr("Failed to initialize a t_philo"));
+			return (ft_puterr_ptr("Failed to initialize a t_philo structure"));
+		if (!i)
+			first = philo;
+		if (ft_initialize_forks(philo, main_args->n_philos, prev, first))
+			return (NULL);
 		if (pthread_create(&(ret[i]), NULL, &ft_thread_function, philo))
 			return (ft_puterr_ptr("Failed to create a thread"));
+		prev = philo;
 	}
 	while (--i > 0)
 	{

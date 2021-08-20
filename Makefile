@@ -6,7 +6,7 @@
 #    By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/16 12:05:15 by ysoroko           #+#    #+#              #
-#    Updated: 2021/08/20 10:22:09 by ysoroko          ###   ########.fr        #
+#    Updated: 2021/08/20 11:50:19 by ysoroko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,11 @@ all:	$(NAME)
 $(NAME): $(OBJS)
 		@$(COMP_START)
 		@$(GCC) $(FLAGS) $(OBJS) -o $(EXECUTABLE)
+		@$(COMPILED)
+
+wrun:	$(OBJS)
+		@$(COMP_START)
+		@$(GCC) $(OBJS) -o $(EXECUTABLE)
 		@$(COMPILED)
 
 clean:
