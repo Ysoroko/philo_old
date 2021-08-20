@@ -6,7 +6,7 @@
 #    By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/16 12:05:15 by ysoroko           #+#    #+#              #
-#    Updated: 2021/08/19 11:55:11 by ysoroko          ###   ########.fr        #
+#    Updated: 2021/08/20 10:22:09 by ysoroko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ UTILS	=	utils/ft_output_utils.c \
 			utils/ft_structure_utils.c \
 
 PHILOS	=	philosophers/ft_thread_function.c \
+			philosophers/ft_time_utils.c \
 
 SRC		=	$(UTILS) \
 			$(PHILOS) \
