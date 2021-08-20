@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:20:51 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/20 11:51:20 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/20 12:03:50 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,16 @@ int			ft_isnum(char c);
 
 t_main_args	*ft_new_main_args(void);
 t_philo		*ft_initialize_philo(t_main_args *main_args, int number);
-void		ft_print_main_args(t_main_args *main_args);
 
 void		*ft_thread_function(void *arg);
 int			ft_setup_start_time(t_philo *philo);
+
+/*
+** DEBUG
+*/
+
+void		ft_print_main_args(t_main_args *main_args);
+void		ft_print_philo(t_philo	*philo);
 
 /*
 ** COLORS

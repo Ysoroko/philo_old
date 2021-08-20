@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 15:32:17 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/20 10:27:54 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/20 12:03:27 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,26 @@ void	ft_print_main_args(t_main_args *main_args)
 	printf("Time to eat: [%d]\n", main_args->t_to_eat);
 	printf("Time to sleep: [%d]\n", main_args->t_to_sleep);
 	printf("Number to eat: [%d]\n", main_args->n_to_eat);
+}
+
+void	ft_print_philo(t_philo	*philo)
+{
+	printf("\n\n\n");
+	printf("____________________________________________________________________\n");
+	printf("Philo number: [%d]\n", philo->philo_number);
+	printf("Time to die: [%d]\n", philo->t_to_die);
+	printf("Time to sleep: [%d]\n", philo->t_to_sleep);
+	printf("Time to eat: [%d]\n", philo->t_to_eat);
+	printf("N to eat: [%d]\n", philo->n_to_eat);
+	printf("N_times_ate: [%d]\n", philo->n_times_ate);
+	printf("Start time: [%d]\n", philo->start_time);
+	printf("Current time: [%d]\n", philo->current_time);
+	printf("N seconds without eating: [%d]\n", philo->n_seconds_without_eating);
+	printf("State: [%d]\n", philo->state);
+	printf("Left fork address: [%p]\n", philo->left_fork);
+	printf("Right fork address: [%p]\n", philo->right_fork);
+	printf("\n____________________________________________________________________");
+	printf("\n\n\n");
 }
 
 /// Creates a new t_philo structure and assigns its values
