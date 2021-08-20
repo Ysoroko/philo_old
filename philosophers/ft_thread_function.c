@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 14:32:41 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/20 15:31:44 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/20 16:19:33 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ static int	ft_philo_routine(t_philo *philo)
 /// To clean up:
 /// 1) Free the address of left fork
 /// 2) Destroy the mutex of the same left fork
-/// 3) Free t_philo structure itself
+///	3) Free the address of the "displaying" mutex
+/// 4) Free t_philo structure itself
+
+
 static int	ft_cleanup_threads_and_mutexes(t_philo *philo)
 {
 	if (pthread_mutex_destroy(philo->left_fork))
@@ -47,8 +50,9 @@ static int	ft_cleanup_threads_and_mutexes(t_philo *philo)
 		free(philo->left_fork);
 		return (-1);
 	}
-	free(philo);
 	free(philo->left_fork);
+	free(philo->displaying);
+	free(philo);
 	return (0);
 }
 

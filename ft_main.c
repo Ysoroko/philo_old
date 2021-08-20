@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:04:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/20 16:03:18 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/20 16:21:34 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,22 @@ static t_main_args	*ft_initialize_main_args_struct(int argc, char **argv)
 /// Returns a NULL pointer in case of an error
 static pthread_t	*ft_initialize_threads(t_main_args *main_args)
 {
-	pthread_t	*ret;
-	t_philo		*philo;
-	t_philo		*prev;
-	t_philo		*first;
+	pthread_t		*ret;
+	t_philo			*philo;
+	t_philo			*prev;
+	t_philo			*first;
+	pthread_mutex_t	*displaying;
+
 	int			i;
 
-	if (!ft_malloc(sizeof(*ret) * main_args->n_philos, &ret))
+	if (!ft_malloc(sizeof(*ret) * main_args->n_philos, (void **)&ret))
 		return (ft_puterr_ptr("Failed to malloc the philosophers"));
 	i = -1;
 	prev = NULL;
+	if (!ft_malloc(sizeof(pthread_mutex_t), (void **)&displaying))
+		return (ft_free(ret, "Failed malloc a mutex for display", NULL));
+	if (pthread_mutex_init(displaying, NULL))
+		return (ft_free(displaying, "Failed to init a display mutex", NULL));
 	while (++i < main_args->n_philos)
 	{
 		philo = ft_initialize_philo(main_args, i + 1, &first);
@@ -77,6 +83,7 @@ static pthread_t	*ft_initialize_threads(t_main_args *main_args)
 			return (ft_free(ret, "Failed to initialize a t_philo", NULL));
 		if (ft_initialize_forks(philo, main_args->n_philos, prev, first))
 			return (NULL);
+		philo->displaying = displaying;
 		if (pthread_create(&(ret[i]), NULL, &ft_thread_function, philo))
 			return (ft_free(ret, "Failed to create a thread", NULL));
 		prev = philo;

@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 12:03:02 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/20 15:31:29 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/20 16:20:18 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static	void	ft_print_status(t_philo *philo, int state)
 {
 	int	time_elapsed;
 
+	pthread_mutex_lock(philo->displaying);
 	time_elapsed = philo->current_time - philo->start_time;
 	ft_putnbr_fd(time_elapsed, STDOUT);
 	ft_putchar_fd('\t', STDOUT);
@@ -33,6 +34,7 @@ static	void	ft_print_status(t_philo *philo, int state)
 		ft_putendl_fd("is thinking", STDOUT);
 	else if (state == DIED)
 		ft_putendl_fd("died", STDOUT);
+	pthread_mutex_unlock(philo->displaying);
 }
 
 void	ft_eat(t_philo *philo)
