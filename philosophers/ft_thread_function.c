@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 14:32:41 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/20 10:24:30 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/20 10:35:18 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@
 // 	int	state;
 // }	t_philo;
 
+static void	ft_philo_routine(t_philo *philo)
+{
+	while (philo->n_seconds_without_eating < philo->t_to_die)
+	{
+		
+	}
+}
 
 /// Function called when creating a new thread
 void	*ft_thread_function(void *arg)
@@ -35,5 +42,7 @@ void	*ft_thread_function(void *arg)
 	philo = (t_philo *)arg;
 	if (ft_setup_start_time(philo) == -1)
 		return (NULL);
+	ft_philo_routine(philo);
+	free(arg);
 	return (arg);
 }

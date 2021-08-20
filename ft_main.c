@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:04:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/19 11:57:06 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/20 11:09:31 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static t_main_args	*ft_initialize_main_args_struct(int argc, char **argv)
 	ret->t_to_sleep = (int)(ft_atol(argv[4]));
 	if (argc == 6)
 		ret->n_to_eat = (int)(ft_atol(argv[5]));
-	ret->current_philo = 0;
 	return (ret);
 }
 
