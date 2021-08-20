@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:20:51 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/20 16:02:30 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/20 16:09:16 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ char		*ft_strchrset(char *str, char *charset);
 long		ft_atol(char *str);
 int			ft_isnum(char c);
 void		*ft_free(void *to_free, char *error_msg, void *to_return);
+int			ft_free_int_ret(void *to_free, char *error_msg, int to_return);
 void		*ft_malloc(int size, void **malloc_this);
 
 t_main_args	*ft_new_main_args(void);

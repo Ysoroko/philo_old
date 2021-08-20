@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 15:32:17 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/20 16:02:23 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/20 16:10:05 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_print_main_args(t_main_args *main_args)
 	printf("Number to eat: [%d]\n", main_args->n_to_eat);
 }
 
+/// Prints the values of t_philo structure
 void	ft_print_philo(t_philo	*philo)
 {
 	printf("\n\n\n");
@@ -69,6 +70,15 @@ t_philo	*ft_initialize_philo(t_main_args *args, int n, t_philo **f)
 
 /// Frees to_free argument, displays error_msg argument and returns to_return
 void	*ft_free(void *to_free, char *error_msg, void *to_return)
+{
+	free(to_free);
+	if (error_msg)
+		ft_puterr(error_msg);
+	return (to_return);
+}
+
+/// Frees to_free argument, displays error_msg argument and returns to_return
+int		ft_free_int_ret(void *to_free, char *error_msg, int to_return)
 {
 	free(to_free);
 	if (error_msg)

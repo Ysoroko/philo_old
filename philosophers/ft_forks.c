@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 15:36:39 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/20 15:36:56 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/20 16:11:08 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_initialize_forks(t_philo *ph, int n, t_philo *prev, t_philo *f)
 	if (!left_fork)
 		return (ft_puterr("Failed to malloc a mutex fork"));
 	if (pthread_mutex_init(left_fork, NULL))
-		return (ft_puterr("Failed to initialize a mutex for the fork"));
+		return (ft_free_int_ret(left_fork, "Failed to init a mutex fork", -1));
 	if (!prev)
 		ph->left_fork = left_fork;
 	else if (ph->philo_number == n)
