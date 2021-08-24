@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 15:32:17 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/24 14:30:29 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/24 15:35:19 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	ft_print_philo(t_philo	*philo, int with_mutex)
 	printf("Start time: [%d]\n", philo->start_time);
 	printf("Current time: [%d]\n", philo->current_time);
 	printf("N seconds without eating: [%d]\n", philo->time_last_time_ate);
-	printf("State: [%d]\n", philo->state);
 	printf("Left fork address: [%p]\n", philo->left_fork);
 	printf("Right fork address: [%p]\n", philo->right_fork);
 	printf("\n____________________________________________________________________");
@@ -66,7 +65,6 @@ t_philo	*ft_initialize_philo(t_main_args *args, int n, t_philo **f)
 	ret->start_time = 0;
 	ret->current_time = 0;
 	ret->time_last_time_ate = 0;
-	ret->state = 0;
 	if (!(n - 1))
 		*f = ret;
 	return (ret);

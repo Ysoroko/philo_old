@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 14:32:41 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/24 14:58:24 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/24 15:42:05 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 /// !!! If at any moment they didn't eat for t_to_die milliseconds, they die
 static int	ft_philo_routine(t_philo *philo)
 {
-	while ((philo->current_time - philo->time_last_time_ate) < philo->t_to_die)
+	while (1)
 	{
 		if (ft_eat(philo) || ft_sleep(philo) || ft_think(philo))
 			return (-1);
@@ -32,17 +32,26 @@ static int	ft_philo_routine(t_philo *philo)
 /// 1) Free the address of left fork
 /// 2) Destroy the mutex of the same left fork
 ///	3) Free the address of the "displaying" mutex
-/// 4) Free t_philo structure itself
-
+/// 4) Destroy the mutex of "displaying" mutex
+/// 5) Free t_philo structure itself
 static int	ft_cleanup_threads_and_mutexes(t_philo *philo)
 {
-	free(philo->left_fork);
-	free(philo->displaying);
 	if (pthread_mutex_destroy(philo->left_fork))
 	{
+		free(philo->left_fork);
+		free(philo->displaying);
 		free(philo);
 		return (-1);
 	}
+	if (pthread_mutex_destroy(philo->displaying))
+	{
+		free(philo->left_fork);
+		free(philo->displaying);
+		free(philo);
+		return (-1);
+	}
+	free(philo->left_fork);
+	free(philo->displaying);
 	free(philo);
 	return (0);
 }
@@ -59,6 +68,7 @@ void	*ft_thread_function(void *arg)
 	if (ft_setup_start_time(philo) == -1)
 		return (NULL);
 	ft_philo_routine(philo);
-	ft_cleanup_threads_and_mutexes(philo);
+	if (!philo)
+		ft_cleanup_threads_and_mutexes(philo);
 	return (NULL);
 }

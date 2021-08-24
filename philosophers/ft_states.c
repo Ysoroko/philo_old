@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 12:03:02 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/24 15:06:17 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/24 15:54:55 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ static	int	ft_print_status(t_philo *philo, int state)
 	if (pthread_mutex_lock(philo->displaying))
 		return (ft_puterr("Failed to lock display mutex"));
 	if (ft_get_current_time(philo) == -1)
+	{
+		pthread_mutex_unlock(philo->displaying);
 		return (ft_puterr("Failed to get current time"));
+	}
 	ft_putnbr_fd(philo->current_time - philo->start_time, STDOUT);
 	ft_putchar_fd('\t', STDOUT);
 	ft_putnbr_fd(philo->philo_number, STDOUT);
@@ -69,15 +72,20 @@ int	ft_eat(t_philo *philo)
 		return (ft_puterr("Failed to unlock right fork"));
 	if (ft_update_last_time_ate(philo))
 		return (ft_puterr("Couldn't update last time the philosopher ate"));
+	philo->n_times_ate++;
 	return (0);
 }
 
 /// Philosopher's "sleeping" status he enters after he finished eating
+/// Since the sleeping status is right after eating, we check in philosopher
+/// ate enough times. If so, we quit.
 /// Displays a message that the philosopher has started to sleep
 /// Waits for t_to_sleep milliseconds
 /// Returns 0 in case of success, -1 in case of error
 int	ft_sleep(t_philo *philo)
 {
+	if (philo->n_to_eat && philo->n_times_ate > philo->n_to_eat - 1)
+		return (1);
 	if (ft_print_status(philo, SLEEPING) || ft_msleep(philo->t_to_sleep))
 		return (-1);
 	return (0);
