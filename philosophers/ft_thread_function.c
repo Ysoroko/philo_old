@@ -6,28 +6,19 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 14:32:41 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/24 12:07:58 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/24 12:19:10 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philosophers.h"
 
-// typedef struct s_philo
-// {
-// 	int	philo_number;
-// 	int	t_to_die;
-// 	int	t_to_sleep;
-// 	int	t_to_eat;
-// 	int	n_to_eat;
-// 	int	start_time;
-// 	int	current_time;
-// 	int	n_seconds_without_eating;
-// 	int	state;
-// }	t_philo;
-
+/// The routine where each philosopher will eat, sleep and think
+/// 1: They eat if both their forks are available
+/// 2: They sleep after they finished eating
+/// 3: They think after they finished sleeping
+/// !!! If at any moment they didn't eat for t_to_die milliseconds, they die
 static int	ft_philo_routine(t_philo *philo)
 {
-	//ft_print_philo(philo);
 	while (philo->n_seconds_without_eating < philo->t_to_die)
 	{
 		ft_eat(philo);
