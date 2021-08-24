@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:20:51 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/20 16:15:39 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/24 11:24:20 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ typedef struct s_philo
 	int				t_to_eat;
 	int				n_to_eat;
 	int				n_times_ate;
-	int				start_time;
-	int				current_time;
+	suseconds_t		start_time;
+	suseconds_t		current_time;
 	int				n_seconds_without_eating;
 	int				state;
 	pthread_mutex_t	*left_fork;
@@ -97,6 +97,7 @@ void		*ft_thread_function(void *arg);
 
 int			ft_setup_start_time(t_philo *philo);
 int			ft_get_current_time(t_philo *philo);
+int			ft_msleep(int n_milliseconds);
 
 void		ft_eat(t_philo *philo);
 int			ft_sleep(t_philo *philo);
