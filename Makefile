@@ -6,7 +6,7 @@
 #    By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/16 12:05:15 by ysoroko           #+#    #+#              #
-#    Updated: 2021/08/20 15:52:40 by ysoroko          ###   ########.fr        #
+#    Updated: 2021/08/24 14:40:00 by ysoroko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,7 @@ clean:
 		@rm -rf $(OBJS)
 		@$(CLEANED)
 
-fclean: clean
+fclean:	clean
 		@rm -rf $(EXECUTABLE)
 		@$(FCLEANED)
 
@@ -79,5 +79,21 @@ re:		fclean all
 
 .c.o:
 	@${GCC} ${FLAGS} -c $< -o ${<:.c=.o}
+
+# ------------------------------ Tests ------------------------------
+
+test1:	all
+		./$(EXECUTABLE) 5 800 200 200
+
+test2:	all
+		./$(EXECUTABLE) 5 800 200 200 7
+
+test3:	all
+		./$(EXECUTABLE) 4 410 200 200
+
+test4:	all
+		./$(EXECUTABLE) 4 310 200 100
+
+# -------------------------------------------------------------------
 
 .PHONY:	all clean fclean re

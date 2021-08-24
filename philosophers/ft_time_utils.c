@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 10:12:48 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/24 14:27:06 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/24 14:31:38 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ int	ft_update_last_time_ate(t_philo *philo)
 
 	if (gettimeofday(&time_value, NULL) == -1)
 		return (-1);
+	in_microseconds = time_value.tv_usec / 1000;
 	philo->time_last_time_ate = in_microseconds;
+	return (0);
 }
 
 /// Returns 1 if a philo has died, 0 otherwise
@@ -71,7 +73,7 @@ int	ft_check_if_philo_died(t_philo *philo)
 	useconds_t	time_without_eating;
 
 	time_without_eating = philo->current_time - philo->time_last_time_ate;
-	if (time_without_eating >= philo->t_to_die)
+	if (time_without_eating >= ((useconds_t)philo->t_to_die))
 		return (1);
 	else
 		return (0);
