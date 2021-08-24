@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 12:03:02 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/24 16:37:11 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/24 16:45:26 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,19 @@ static	int	ft_print_status(t_philo *philo, int state)
 	return (0);
 }
 
+static int	ft_eat_alone(t_philo *philo)
+{
+	if (pthread_mutex_lock(philo->left_fork))
+		return (ft_puterr("Failed to lock left fork"));
+	if (ft_print_status(philo, FORK))
+		return (-1);
+	ft_print_status(philo, DIED);
+	if (ft_msleep(philo->t_to_die + 10))
+		return (ft_puterr("A call to usleep failed (eating alone)"));
+	ft_print_status(philo, DIED);
+	return (0);
+}
+
 /// Philosopher's "eating" state
 /// The philosopher will take his 2 forks if available and start eating
 /// Displays a message for each fork taken and when he starts to eat
@@ -53,6 +66,8 @@ int	ft_eat(t_philo *philo)
 {
 	int	time_to_eat;
 
+	if (!philo->right_fork)
+		return (ft_eat_alone(philo));
 	if (pthread_mutex_lock(philo->left_fork))
 		return (ft_puterr("Failed to lock left fork"));
 	if (pthread_mutex_lock(philo->right_fork))
