@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 12:03:02 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/24 14:58:07 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/24 15:06:17 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 /// Prints the message status as required per subject
 /// Ex: "2000 1 is sleeping"
+/// Returns 0 in case of success, -1 in case of error
 static	int	ft_print_status(t_philo *philo, int state)
 {
 	if (pthread_mutex_lock(philo->displaying))
@@ -39,6 +40,12 @@ static	int	ft_print_status(t_philo *philo, int state)
 	return (0);
 }
 
+/// Philosopher's "eating" state
+/// The philosopher will take his 2 forks if available and start eating
+/// Displays a message for each fork taken and when he starts to eat
+/// Pauses the thread for t_to_eat milliseconds.
+/// At the end updates the last time when the philosopher ate
+/// Returns 0 in case of success, -1 in case of error
 int	ft_eat(t_philo *philo)
 {
 	int	time_to_eat;
@@ -65,15 +72,23 @@ int	ft_eat(t_philo *philo)
 	return (0);
 }
 
+/// Philosopher's "sleeping" status he enters after he finished eating
+/// Displays a message that the philosopher has started to sleep
+/// Waits for t_to_sleep milliseconds
+/// Returns 0 in case of success, -1 in case of error
 int	ft_sleep(t_philo *philo)
 {
-	ft_print_status(philo, SLEEPING);
-	ft_msleep(philo->t_to_sleep);
+	if (ft_print_status(philo, SLEEPING) || ft_msleep(philo->t_to_sleep))
+		return (-1);
 	return (0);
 }
 
+/// Philosopher's "thinking" status he enters after he finished sleeping
+/// Displays a message that the philosopher has started to think
+/// Returns 0 in case of success, -1 in case of error
 int	ft_think(t_philo *philo)
 {
-	ft_print_status(philo, THINKING);
+	if (ft_print_status(philo, THINKING))
+		return (-1);
 	return (0);
 }
