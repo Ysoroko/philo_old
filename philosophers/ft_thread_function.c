@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 14:32:41 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/24 14:20:04 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/24 14:58:24 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ static int	ft_philo_routine(t_philo *philo)
 {
 	while ((philo->current_time - philo->time_last_time_ate) < philo->t_to_die)
 	{
-		ft_eat(philo);
-		ft_sleep(philo);
-		ft_think(philo);
+		if (ft_eat(philo) || ft_sleep(philo) || ft_think(philo))
+			return (-1);
 	}
 	return (0);
 }
@@ -37,19 +36,20 @@ static int	ft_philo_routine(t_philo *philo)
 
 static int	ft_cleanup_threads_and_mutexes(t_philo *philo)
 {
+	free(philo->left_fork);
+	free(philo->displaying);
 	if (pthread_mutex_destroy(philo->left_fork))
 	{
 		free(philo);
-		free(philo->left_fork);
 		return (-1);
 	}
-	free(philo->left_fork);
-	free(philo->displaying);
 	free(philo);
 	return (0);
 }
 
 /// Function called when creating a new thread
+/// Sets up the starting time, enters the philopher's routine (eat-sleep-think)
+/// At the end once out of the routine, cleans up the memory and the mutexes.
 void	*ft_thread_function(void *arg)
 {
 	t_philo	*philo;
@@ -58,9 +58,7 @@ void	*ft_thread_function(void *arg)
 	philo = (t_philo *)arg;
 	if (ft_setup_start_time(philo) == -1)
 		return (NULL);
-	//ft_print_philo(philo);
 	ft_philo_routine(philo);
-	if (!arg)
-		ft_cleanup_threads_and_mutexes(arg);
-	return (arg);
+	ft_cleanup_threads_and_mutexes(philo);
+	return (NULL);
 }

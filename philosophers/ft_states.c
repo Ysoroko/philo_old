@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 12:03:02 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/24 12:08:59 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/24 14:58:07 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static	int	ft_print_status(t_philo *philo, int state)
 	ft_putchar_fd('\t', STDOUT);
 	if (state == EATING)
 		ft_putendl_fd("is eating", STDOUT);
-	else if (state == TOOK_A_FORK)
+	else if (state == FORK)
 		ft_putendl_fd("has taken a fork", STDOUT);
 	else if (state == SLEEPING)
 		ft_putendl_fd("is sleeping", STDOUT);
@@ -47,18 +47,21 @@ int	ft_eat(t_philo *philo)
 		return (ft_puterr("Failed to lock left fork"));
 	if (pthread_mutex_lock(philo->right_fork))
 		return (ft_puterr("Failed to lock right fork"));
-	ft_print_status(philo, TOOK_A_FORK);
-	ft_print_status(philo, TOOK_A_FORK);
+	if (ft_print_status(philo, FORK) || ft_print_status(philo, FORK))
+		return (-1);
 	time_to_eat = philo->t_to_eat;
 	if (ft_get_current_time(philo) == -1)
 		return (ft_puterr("Failed to get current time"));
-	ft_print_status(philo, EATING);
+	if (ft_print_status(philo, EATING))
+		return (-1);
 	if (ft_msleep(philo->t_to_eat) == -1)
 		return (ft_puterr("Failed to call usleep function"));
 	if (pthread_mutex_unlock(philo->left_fork))
 		return (ft_puterr("Failed to unlock left fork"));
 	if (pthread_mutex_unlock(philo->right_fork))
 		return (ft_puterr("Failed to unlock right fork"));
+	if (ft_update_last_time_ate(philo))
+		return (ft_puterr("Couldn't update last time the philosopher ate"));
 	return (0);
 }
 

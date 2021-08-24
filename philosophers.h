@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:20:51 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/24 14:27:29 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/24 14:56:46 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_philo
 # define BASE_TEN "0123456789"
 # define INT_MAX 2147483647
 # define EATING 1
-# define TOOK_A_FORK 2
+# define FORK 2
 # define THINKING 3
 # define SLEEPING 4
 # define DIED 5
