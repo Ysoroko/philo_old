@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 12:03:02 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/24 11:06:20 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/24 11:38:43 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 /// Prints the message status as required per subject
 /// Ex: "2000 1 is sleeping"
-static	void	ft_print_status(t_philo *philo, int state)
+static	int	ft_print_status(t_philo *philo, int state)
 {
 	int	time_elapsed;
 
-	pthread_mutex_lock(philo->displaying);
+	if (pthread_mutex_lock(philo->displaying))
+		return (ft_puterr("Failed to lock display mutex"));
 	time_elapsed = philo->current_time - philo->start_time;
 	ft_putnbr_fd(time_elapsed, STDOUT);
 	ft_putchar_fd('\t', STDOUT);
@@ -34,35 +35,43 @@ static	void	ft_print_status(t_philo *philo, int state)
 		ft_putendl_fd("is thinking", STDOUT);
 	else if (state == DIED)
 		ft_putendl_fd("died", STDOUT);
-	pthread_mutex_unlock(philo->displaying);
+	if (pthread_mutex_unlock(philo->displaying))
+		return (ft_puterr("Failed to unlock display mutex"));
+	return (0);
 }
 
-void	ft_eat(t_philo *philo)
+int	ft_eat(t_philo *philo)
 {
 	int	time_to_eat;
 
-	pthread_mutex_lock(philo->left_fork);
-	pthread_mutex_lock(philo->right_fork);
+	if (pthread_mutex_lock(philo->left_fork))
+		return (ft_puterr("Failed to lock left fork"));
+	if (pthread_mutex_lock(philo->right_fork))
+		return (ft_puterr("Failed to lock right fork"));
 	ft_print_status(philo, TOOK_A_FORK);
 	ft_print_status(philo, TOOK_A_FORK);
 	time_to_eat = philo->t_to_eat;
 	if (ft_get_current_time(philo) == -1)
-		return ;
+		return (ft_puterr("Failed to get current time"));
 	ft_print_status(philo, EATING);
-	pthread_mutex_unlock(philo->right_fork);
-	pthread_mutex_unlock(philo->left_fork);
+	if (ft_msleep(philo->t_to_eat) == -1)
+		return (ft_puterr("Failed to call usleep function"));
+	if (pthread_mutex_unlock(philo->left_fork))
+		return (ft_puterr("Failed to unlock left fork"));
+	if (pthread_mutex_unlock(philo->right_fork))
+		return (ft_puterr("Failed to unlock right fork"));
+	return (0);
 }
 
 int	ft_sleep(t_philo *philo)
 {
-	if (!philo)
-		return (0);
+	ft_print_status(philo, SLEEPING);
+	ft_msleep(philo->t_to_sleep);
 	return (0);
 }
 
 int	ft_think(t_philo *philo)
 {
-	if (!philo)
-		return (0);
+	ft_print_status(philo, THINKING);
 	return (0);
 }

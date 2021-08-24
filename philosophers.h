@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:20:51 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/24 11:24:20 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/24 11:29:06 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int			ft_setup_start_time(t_philo *philo);
 int			ft_get_current_time(t_philo *philo);
 int			ft_msleep(int n_milliseconds);
 
-void		ft_eat(t_philo *philo);
+int			ft_eat(t_philo *philo);
 int			ft_sleep(t_philo *philo);
 int			ft_think(t_philo *philo);
 

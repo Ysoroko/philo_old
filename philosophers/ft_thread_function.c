@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 14:32:41 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/20 16:32:49 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/24 11:36:04 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static int	ft_philo_routine(t_philo *philo)
 	while (philo->n_seconds_without_eating < philo->t_to_die)
 	{
 		ft_eat(philo);
+		ft_sleep(philo);
+		ft_think(philo);
 	}
 	return (0);
 }
