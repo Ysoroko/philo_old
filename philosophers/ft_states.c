@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 12:03:02 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/24 11:38:43 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/24 12:08:59 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,11 @@
 /// Ex: "2000 1 is sleeping"
 static	int	ft_print_status(t_philo *philo, int state)
 {
-	int	time_elapsed;
-
 	if (pthread_mutex_lock(philo->displaying))
 		return (ft_puterr("Failed to lock display mutex"));
-	time_elapsed = philo->current_time - philo->start_time;
-	ft_putnbr_fd(time_elapsed, STDOUT);
+	if (ft_get_current_time(philo) == -1)
+		return (ft_puterr("Failed to get current time"));
+	ft_putnbr_fd(philo->current_time - philo->start_time, STDOUT);
 	ft_putchar_fd('\t', STDOUT);
 	ft_putnbr_fd(philo->philo_number, STDOUT);
 	ft_putchar_fd('\t', STDOUT);

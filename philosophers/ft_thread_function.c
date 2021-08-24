@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 14:32:41 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/24 11:36:04 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/24 12:07:58 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 
 static int	ft_philo_routine(t_philo *philo)
 {
+	//ft_print_philo(philo);
 	while (philo->n_seconds_without_eating < philo->t_to_die)
 	{
 		ft_eat(philo);
@@ -42,7 +43,6 @@ static int	ft_philo_routine(t_philo *philo)
 /// 2) Destroy the mutex of the same left fork
 ///	3) Free the address of the "displaying" mutex
 /// 4) Free t_philo structure itself
-
 
 static int	ft_cleanup_threads_and_mutexes(t_philo *philo)
 {

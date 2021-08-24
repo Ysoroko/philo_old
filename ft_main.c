@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:04:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/20 16:21:34 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/24 12:07:38 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static t_main_args	*ft_initialize_main_args_struct(int argc, char **argv)
 	ret->t_to_die = (int)(ft_atol(argv[2]));
 	ret->t_to_eat = (int)(ft_atol(argv[3]));
 	ret->t_to_sleep = (int)(ft_atol(argv[4]));
+	ret->n_to_eat = 0;
 	if (argc == 6)
 		ret->n_to_eat = (int)(ft_atol(argv[5]));
 	return (ret);

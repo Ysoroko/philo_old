@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:20:51 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/24 11:29:06 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/24 12:04:42 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int			ft_think(t_philo *philo);
 */
 
 void		ft_print_main_args(t_main_args *main_args);
-void		ft_print_philo(t_philo	*philo);
+void		ft_print_philo(t_philo	*philo, int with_mutex);
 
 /*
 ** COLORS

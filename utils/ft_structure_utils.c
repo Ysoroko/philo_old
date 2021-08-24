@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 15:32:17 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/20 16:28:43 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/24 12:06:05 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ void	ft_print_main_args(t_main_args *main_args)
 }
 
 /// Prints the values of t_philo structure
-void	ft_print_philo(t_philo	*philo)
+void	ft_print_philo(t_philo	*philo, int with_mutex)
 {
-	pthread_mutex_lock(philo->displaying);
+	if (with_mutex)
+		pthread_mutex_lock(philo->displaying);
 	printf("\n\n\n");
 	printf("____________________________________________________________________\n");
 	printf("Philo number: [%d]\n", philo->philo_number);
@@ -42,7 +43,8 @@ void	ft_print_philo(t_philo	*philo)
 	printf("Right fork address: [%p]\n", philo->right_fork);
 	printf("\n____________________________________________________________________");
 	printf("\n\n\n");
-	pthread_mutex_unlock(philo->displaying);
+	if (with_mutex)
+		pthread_mutex_unlock(philo->displaying);
 }
 
 /// Creates a new t_philo structure and assigns its values
@@ -56,7 +58,7 @@ t_philo	*ft_initialize_philo(t_main_args *args, int n, t_philo **f)
 	ret->philo_number = n;
 	ret->t_to_die = args->t_to_die;
 	ret->t_to_sleep = args->t_to_sleep;
-	ret->t_to_eat = args->n_to_eat;
+	ret->t_to_eat = args->t_to_eat;
 	ret->n_to_eat = 0;
 	if (args->n_to_eat)
 		ret->n_to_eat = args->n_to_eat;
