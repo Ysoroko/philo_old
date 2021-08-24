@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:20:51 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/24 12:04:42 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/24 14:27:29 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_philo
 	int				n_times_ate;
 	suseconds_t		start_time;
 	suseconds_t		current_time;
-	int				n_seconds_without_eating;
+	suseconds_t		time_last_time_ate;
 	int				state;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
@@ -98,6 +98,8 @@ void		*ft_thread_function(void *arg);
 int			ft_setup_start_time(t_philo *philo);
 int			ft_get_current_time(t_philo *philo);
 int			ft_msleep(int n_milliseconds);
+int			ft_update_last_time_ate(t_philo *philo);
+int			ft_check_if_philo_died(t_philo *philo);
 
 int			ft_eat(t_philo *philo);
 int			ft_sleep(t_philo *philo);

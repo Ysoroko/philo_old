@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 14:32:41 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/24 12:19:10 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/24 14:20:04 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 /// !!! If at any moment they didn't eat for t_to_die milliseconds, they die
 static int	ft_philo_routine(t_philo *philo)
 {
-	while (philo->n_seconds_without_eating < philo->t_to_die)
+	while ((philo->current_time - philo->time_last_time_ate) < philo->t_to_die)
 	{
 		ft_eat(philo);
 		ft_sleep(philo);
