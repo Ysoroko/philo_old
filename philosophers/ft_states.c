@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 12:03:02 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/24 16:45:26 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/25 11:10:04 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	ft_eat(t_philo *philo)
 /// Returns 0 in case of success, -1 in case of error
 int	ft_sleep(t_philo *philo)
 {
-	if (philo->n_times_ate >= philo->n_to_eat)
+	if (philo->n_to_eat && philo->n_times_ate >= philo->n_to_eat)
 		return (1);
 	if (ft_print_status(philo, SLEEPING) || ft_msleep(philo->t_to_sleep))
 		return (-1);
