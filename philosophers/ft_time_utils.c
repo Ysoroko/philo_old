@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 10:12:48 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/24 14:31:38 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/25 11:16:12 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	ft_msleep(int n_milliseconds)
 {
 	useconds_t	in_microseconds;
 
-	in_microseconds = (useconds_t)n_milliseconds * 1000;
+	in_microseconds = (useconds_t)(n_milliseconds * 1000);
 	return (usleep(in_microseconds));
 }
 

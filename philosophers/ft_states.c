@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 12:03:02 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/25 11:10:04 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/25 11:28:41 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,17 @@ static int	ft_eat_alone(t_philo *philo)
 	if (pthread_mutex_lock(philo->left_fork))
 		return (ft_puterr("Failed to lock left fork"));
 	if (ft_print_status(philo, FORK))
+	{
+		pthread_mutex_unlock(philo->left_fork);
 		return (-1);
-	ft_print_status(philo, DIED);
+	}
 	if (ft_msleep(philo->t_to_die + 10))
-		return (ft_puterr("A call to usleep failed (eating alone)"));
-	ft_print_status(philo, DIED);
+	{
+		pthread_mutex_unlock(philo->left_fork);
+		return (-1);
+	}
+	if (pthread_mutex_unlock(philo->left_fork))
+		return (ft_puterr("Failed to unlock left fork"));
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:04:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/25 11:09:18 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/25 11:27:26 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static pthread_t	*ft_initialize_threads(t_main_args *main_args)
 			return (ft_free(ret, "Failed to create a thread", NULL));
 		prev = philo;
 	}
-	usleep(2000);
+	usleep(200000000);
 	while (--i > 0)
 		if (pthread_join(ret[i], NULL))
 			return (ft_free(ret, "Failed to join a thread", NULL));
