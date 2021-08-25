@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 12:03:02 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/25 11:28:41 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/25 11:31:32 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ static	int	ft_print_status(t_philo *philo, int state)
 	return (0);
 }
 
+/// The special eating state in a case where there's only one philosopher
+/// He will have one fork only (because one fork per philosopher)
+/// He will grab the fork, wait for the second one, but since there is none
+/// He will eventually die
 static int	ft_eat_alone(t_philo *philo)
 {
 	if (pthread_mutex_lock(philo->left_fork))
