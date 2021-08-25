@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:04:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/25 13:18:59 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/25 13:34:52 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,38 +38,52 @@ static int	ft_main_args_error(int argc, char **argv)
 	return (0);
 }
 
+static pthread_mutex_t	*ft_initialize_display_mutex(void)
+{
+	pthread_mutex_t	*displaying;
+
+	if (!ft_malloc(sizeof(pthread_mutex_t), (void **)&displaying))
+		return (NULL);
+	if (pthread_mutex_init(displaying, NULL))
+		return (ft_free(displaying, "Failed to init a display mutex", NULL));
+	return (displaying);
+}
+
+static int	ft_init(t_philo **ph, t_main_args *args, int i, pthread_mutex_t *d)
+{
+	ph[2] = ft_initialize_philo(args, i + 1, &(ph[0]));
+	if (!ph[2])
+		return (ft_puterr("Failed to initialize a t_philo"));
+	if (ft_initialize_forks_mutex(ph[2], args->n_philos, ph[1], ph[0]))
+		return (-1);
+	ph[2]->displaying = d;
+	return (0);
+}
+
 /// Initialize an array of threads of n_philos elements with malloc
 /// Creates a thread for every philosopher and joins the threads
 /// Returns a NULL pointer in case of an error
 static pthread_t	*ft_initialize_threads(t_main_args *main_args)
 {
 	pthread_t		*ret;
-	t_philo			*philo;
-	t_philo			*prev;
-	t_philo			*first;
+	t_philo			*ph[3];
 	pthread_mutex_t	*displaying;
-
-	int			i;
+	int				i;
 
 	if (!ft_malloc(sizeof(*ret) * main_args->n_philos, (void **)&ret))
 		return (ft_puterr_ptr("Failed to malloc the philosophers"));
 	i = -1;
-	prev = NULL;
-	if (!ft_malloc(sizeof(pthread_mutex_t), (void **)&displaying))
-		return (ft_free(ret, "Failed malloc a mutex for display", NULL));
-	if (pthread_mutex_init(displaying, NULL))
-		return (ft_free(displaying, "Failed to init a display mutex", NULL));
+	displaying = ft_initialize_display_mutex();
+	ph[0] = NULL;
+	if (!displaying)
+		return (NULL);
 	while (++i < main_args->n_philos)
 	{
-		philo = ft_initialize_philo(main_args, i + 1, &first);
-		if (!philo)
-			return (ft_free(ret, "Failed to initialize a t_philo", NULL));
-		if (ft_initialize_forks_mutex(philo, main_args->n_philos, prev, first))
-			return (NULL);
-		philo->displaying = displaying;
-		if (pthread_create(&(ret[i]), NULL, &ft_thread_function, philo))
+		if (ft_init(ph, main_args, i, displaying))
+			return (ft_free(ret, NULL, NULL));
+		if (pthread_create(&(ret[i]), NULL, &ft_thread_function, ph[2]))
 			return (ft_free(ret, "Failed to create a thread", NULL));
-		prev = philo;
+		ph[0] = ph[2];
 	}
 	while (--i >= 0)
 		if (pthread_join(ret[i], NULL))
