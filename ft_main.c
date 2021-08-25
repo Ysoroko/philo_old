@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:04:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/25 13:34:52 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/25 13:42:41 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static int	ft_main_args_error(int argc, char **argv)
 	return (0);
 }
 
+/// Initializes the "display" mutex
+/// Returns the mutex or a NULL pointer in case of an error
 static pthread_mutex_t	*ft_initialize_display_mutex(void)
 {
 	pthread_mutex_t	*displaying;
@@ -49,6 +51,8 @@ static pthread_mutex_t	*ft_initialize_display_mutex(void)
 	return (displaying);
 }
 
+/// Initializes the t_philo structure, and the mutexes
+/// Returns 0 in case of success or -1 if an error
 static int	ft_init(t_philo **ph, t_main_args *args, int i, pthread_mutex_t *d)
 {
 	ph[2] = ft_initialize_philo(args, i + 1, &(ph[0]));

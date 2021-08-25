@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 15:32:17 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/25 13:18:21 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/25 13:47:32 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_print_philo(t_philo	*philo, int with_mutex)
 	if (with_mutex)
 		pthread_mutex_lock(philo->displaying);
 	printf("\n\n\n");
-	printf("____________________________________________________________________\n");
+	printf("______________________________________________________________\n");
 	printf("Philo number: [%d]\n", philo->philo_number);
 	printf("Time to die: [%d]\n", philo->t_to_die);
 	printf("Time to sleep: [%d]\n", philo->t_to_sleep);
@@ -40,7 +40,7 @@ void	ft_print_philo(t_philo	*philo, int with_mutex)
 	printf("N seconds without eating: [%d]\n", philo->time_last_time_ate);
 	printf("Left fork address: [%p]\n", philo->left_fork);
 	printf("Right fork address: [%p]\n", philo->right_fork);
-	printf("\n____________________________________________________________________");
+	printf("\n_______________________________________________________________");
 	printf("\n\n\n");
 	if (with_mutex)
 		pthread_mutex_unlock(philo->displaying);
@@ -99,7 +99,7 @@ void	*ft_free(void *to_free, char *error_msg, void *to_return)
 }
 
 /// Frees to_free argument, displays error_msg argument and returns to_return
-int		ft_free_int_ret(void *to_free, char *error_msg, int to_return)
+int	ft_free_int_ret(void *to_free, char *error_msg, int to_return)
 {
 	free(to_free);
 	if (error_msg)
