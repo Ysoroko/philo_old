@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 15:36:39 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/24 16:52:56 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/25 11:52:05 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	ft_one_philo_fork(t_philo *ph)
 /// This function creates a mutex for every fork and assigns 2 forks to
 /// every philosopher, both shared with neighbours.
 /// Returns 0 in case of success or -1 in case of an error
-int	ft_initialize_forks(t_philo *ph, int n, t_philo *prev, t_philo *f)
+int	ft_initialize_forks_mutex(t_philo *ph, int n, t_philo *prev, t_philo *f)
 {
 	pthread_mutex_t	*left_fork;
 

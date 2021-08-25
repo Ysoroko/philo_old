@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:20:51 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/24 15:31:52 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/25 11:53:37 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void		ft_putendl_fd(char *str, int fd);
 void		ft_putnbr_fd(int n, int fd);
 int			ft_puterr(char *str);
 void		*ft_puterr_ptr(char *str);
+int			ft_strlen(char *str);
 char		*ft_strchr(char *str, int c);
 char		*ft_strchrset(char *str, char *charset);
 long		ft_atol(char *str);
@@ -90,7 +91,8 @@ void		*ft_malloc(int size, void **malloc_this);
 
 t_main_args	*ft_new_main_args(void);
 t_philo		*ft_initialize_philo(t_main_args *args, int n, t_philo **f);
-int			ft_initialize_forks(t_philo *ph, int n, t_philo *prev, t_philo *f);
+int			ft_initialize_forks_mutex(t_philo *ph, int n, t_philo *prev,
+				t_philo *f);
 
 void		*ft_thread_function(void *arg);
 

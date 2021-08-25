@@ -6,11 +6,24 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:43:38 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/19 11:09:38 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/25 11:53:28 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philosophers.h"
+
+/// Calculates the length of the string (without ending '\0') and returns it
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
 
 /// Checks if character c (int argument) is present is str string argument.
 /// Returns the adress of the first occurence of c in str if it's found.

@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:04:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/25 11:43:01 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/25 11:51:40 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static int	ft_main_args_error(int argc, char **argv)
 			if (!ft_strchr(BASE_TEN, argv[i][j]))
 				return (ft_puterr("Found non numerical input"));
 		}
-		if (ft_atol(argv[i]) <= 0 || ft_atol(argv[i]) > INT_MAX)
+		if (ft_strlen(argv[i]) > ft_strlen("2147483647")
+			|| ft_atol(argv[i]) <= 0 || ft_atol(argv[i]) > INT_MAX)
 			return (ft_puterr("Outside integers in range [1 ; 2147483647]"));
 	}
 	return (0);
@@ -82,15 +83,14 @@ static pthread_t	*ft_initialize_threads(t_main_args *main_args)
 		philo = ft_initialize_philo(main_args, i + 1, &first);
 		if (!philo)
 			return (ft_free(ret, "Failed to initialize a t_philo", NULL));
-		if (ft_initialize_forks(philo, main_args->n_philos, prev, first))
+		if (ft_initialize_forks_mutex(philo, main_args->n_philos, prev, first))
 			return (NULL);
 		philo->displaying = displaying;
 		if (pthread_create(&(ret[i]), NULL, &ft_thread_function, philo))
 			return (ft_free(ret, "Failed to create a thread", NULL));
 		prev = philo;
 	}
-	i = -1;
-	while (++i < main_args->n_philos)
+	while (--i >= 0)
 		if (pthread_join(ret[i], NULL))
 			return (ft_free(ret, "Failed to join a thread", NULL));
 	return (ret);
@@ -117,6 +117,7 @@ int	main(int argc, char **argv)
 	philosophers = ft_initialize_threads(main_args);
 	if (!philosophers)
 		return (-1);
+	free(main_args);
 	free(philosophers);
 	return (0);
 }
