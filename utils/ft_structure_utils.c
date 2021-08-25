@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 15:32:17 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/24 15:35:19 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/25 13:18:21 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,25 @@ void	ft_print_philo(t_philo	*philo, int with_mutex)
 	printf("\n\n\n");
 	if (with_mutex)
 		pthread_mutex_unlock(philo->displaying);
+}
+
+/// Create a new t_main_args structure using malloc and set up its values.
+/// Returns a NULL pointer if the malloc call fails
+t_main_args	*ft_initialize_main_args_struct(int argc, char **argv)
+{
+	t_main_args	*ret;
+
+	ret = malloc(sizeof(t_main_args));
+	if (!ret)
+		return (ft_puterr_ptr("Couldn't malloc a t_main_args"));
+	ret->n_philos = (int)(ft_atol(argv[1]));
+	ret->t_to_die = (int)(ft_atol(argv[2]));
+	ret->t_to_eat = (int)(ft_atol(argv[3]));
+	ret->t_to_sleep = (int)(ft_atol(argv[4]));
+	ret->n_to_eat = 0;
+	if (argc == 6)
+		ret->n_to_eat = (int)(ft_atol(argv[5]));
+	return (ret);
 }
 
 /// Creates a new t_philo structure and assigns its values

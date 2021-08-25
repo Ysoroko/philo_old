@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:20:51 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/25 11:53:37 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/25 13:18:53 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void		*ft_free(void *to_free, char *error_msg, void *to_return);
 int			ft_free_int_ret(void *to_free, char *error_msg, int to_return);
 void		*ft_malloc(int size, void **malloc_this);
 
-t_main_args	*ft_new_main_args(void);
+t_main_args	*ft_initialize_main_args_struct(int argc, char **argv);
 t_philo		*ft_initialize_philo(t_main_args *args, int n, t_philo **f);
 int			ft_initialize_forks_mutex(t_philo *ph, int n, t_philo *prev,
 				t_philo *f);
