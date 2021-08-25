@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:04:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/25 14:22:36 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/25 14:24:33 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ int	main(int argc, char **argv)
 
 	if (ft_main_args_error(argc, argv))
 		return (-1);
+	// PHILOS TO BE MALLOC'D HERE
 	main_args = ft_initialize_main_args_struct(argc, argv);
 	if (!main_args)
 		return (-1);
