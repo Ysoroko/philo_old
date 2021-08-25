@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:04:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/25 13:42:41 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/08/25 14:22:36 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,23 +67,23 @@ static int	ft_init(t_philo **ph, t_main_args *args, int i, pthread_mutex_t *d)
 /// Initialize an array of threads of n_philos elements with malloc
 /// Creates a thread for every philosopher and joins the threads
 /// Returns a NULL pointer in case of an error
-static pthread_t	*ft_initialize_threads(t_main_args *main_args)
+static pthread_t	*ft_initialize_threads(t_main_args *args)
 {
 	pthread_t		*ret;
 	t_philo			*ph[3];
 	pthread_mutex_t	*displaying;
 	int				i;
 
-	if (!ft_malloc(sizeof(*ret) * main_args->n_philos, (void **)&ret))
+	if (!ft_malloc(sizeof(*ret) * args->n_philos, (void **)&ret))
 		return (ft_puterr_ptr("Failed to malloc the philosophers"));
 	i = -1;
 	displaying = ft_initialize_display_mutex();
 	ph[0] = NULL;
 	if (!displaying)
 		return (NULL);
-	while (++i < main_args->n_philos)
+	while (++i < args->n_philos)
 	{
-		if (ft_init(ph, main_args, i, displaying))
+		if (ft_init(ph, args, i, displaying))
 			return (ft_free(ret, NULL, NULL));
 		if (pthread_create(&(ret[i]), NULL, &ft_thread_function, ph[2]))
 			return (ft_free(ret, "Failed to create a thread", NULL));
@@ -106,17 +106,21 @@ static pthread_t	*ft_initialize_threads(t_main_args *main_args)
 int	main(int argc, char **argv)
 {
 	t_main_args	*main_args;
-	pthread_t	*philosophers;
+	pthread_t	*threads;
+	t_philo		**philos;
 
 	if (ft_main_args_error(argc, argv))
 		return (-1);
 	main_args = ft_initialize_main_args_struct(argc, argv);
 	if (!main_args)
 		return (-1);
-	philosophers = ft_initialize_threads(main_args);
-	if (!philosophers)
+	philos = malloc(sizeof(t_philo *));
+	//if (!philos)
+	//	return (ft_puterr("Couldn't malloc philos array"));
+	threads = ft_initialize_threads(main_args);
+	if (!threads)
 		return (-1);
 	free(main_args);
-	free(philosophers);
+	free(threads);
 	return (0);
 }
