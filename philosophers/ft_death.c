@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:40:54 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/02 16:37:22 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/02 16:58:50 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	*ft_check_time_and_death(void *arg)
 	useconds_t		current_time;
 	useconds_t		time_without_eating;
 	int				i;
+	int				j;
 
 	death_struct = (t_death_struct *)arg;
 	philos = death_struct->philos;
@@ -46,8 +47,14 @@ static void	*ft_check_time_and_death(void *arg)
 				ft_print_status(philos[i], DIED);
 				return (arg);
 			}
-			else if (philos[i]->n_times_ate >= philos[i]->n_to_eat)
-				return (arg);
+			j = -1;
+			while (++j < n_philos)
+			{
+				if ((philos[j]->n_times_ate) < (philos[j]->n_to_eat))
+					break ;
+				if (j == n_philos - 1 && (philos[j]->n_times_ate) >= (philos[j]->n_to_eat))
+					return (arg);
+			}
 		}
 	}
 	return (arg);
