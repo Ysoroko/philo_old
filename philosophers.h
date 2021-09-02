@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:20:51 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/02 14:35:40 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/02 15:10:20 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_philo
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	*displaying;
+	int				*died;
 }	t_philo;
 
 typedef struct s_death_struct

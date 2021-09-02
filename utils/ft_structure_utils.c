@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 15:32:17 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/25 13:49:24 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/02 15:10:34 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ t_philo	*ft_initialize_philo(t_main_args *args, int n, t_philo **f)
 	ret->start_time = 0;
 	ret->current_time = 0;
 	ret->time_last_time_ate = 0;
+	ret->died = 0;
 	if (!(n - 1))
 		*f = ret;
 	return (ret);

@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:04:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/02 14:36:56 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/02 15:22:24 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ static pthread_t	*ft_initialize_threads(t_main_args *args, t_philo **philos)
 	pthread_t		*ret;
 	pthread_t		*death;
 	t_philo			*ph[3];
+	int				*died;
 	pthread_mutex_t	*displaying;
 	int				i;
 
@@ -80,12 +81,14 @@ static pthread_t	*ft_initialize_threads(t_main_args *args, t_philo **philos)
 	i = -1;
 	displaying = ft_initialize_display_mutex();
 	ph[0] = NULL;
-	if (!displaying)
+	if (!ft_malloc(sizeof(int), (void **)&died) || !displaying)
 		return (NULL);
+	*died = 0;
 	while (++i < args->n_philos)
 	{
 		if (ft_init(ph, args, i, displaying))
 			return (ft_free(ret, NULL, NULL));
+		(ph[2]->died = died);
 		if (pthread_create(&(ret[i]), NULL, &ft_thread_function, ph[2]))
 			return (ft_free(ret, "Failed to create a thread", NULL));
 		ph[0] = ph[2];
@@ -95,9 +98,9 @@ static pthread_t	*ft_initialize_threads(t_main_args *args, t_philo **philos)
 	if (!death)
 		return (NULL);
 	while (--i >= 0)
-		if (pthread_join(ret[i], NULL))
+		if (pthread_detach(ret[i]))
 			return (ft_free(ret, "Failed to join a thread", NULL));
-	if (pthread_detach(*death))
+	if (pthread_join(*death, NULL))
 		return (NULL);
 	return (ret);
 }
