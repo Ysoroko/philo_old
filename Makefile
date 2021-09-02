@@ -6,7 +6,7 @@
 #    By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/16 12:05:15 by ysoroko           #+#    #+#              #
-#    Updated: 2021/09/02 11:43:17 by ysoroko          ###   ########.fr        #
+#    Updated: 2021/09/02 14:11:06 by ysoroko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,15 +83,25 @@ re:		fclean all
 
 # ------------------------------ Tests ------------------------------
 
+# 1 - number of philosophers
+# 2 - time to die
+# 3 - time to eat
+# 4 - time to sleep
+# (optionnal) 5 - number of times they need to eat
+
+# Test 1: no one should die
 test1:	all
 		./$(EXECUTABLE) 5 800 200 200
 
+# Test 2: no one should die and the philosophers each eats 7 times
 test2:	all
 		./$(EXECUTABLE) 5 800 200 200 7
 
+# Test 3: no one should die
 test3:	all
 		./$(EXECUTABLE) 4 410 200 200
 
+# Test 4: A philosopher should die
 test4:	all
 		./$(EXECUTABLE) 4 310 200 100
 

@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:04:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/02 11:39:49 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/02 14:36:56 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ static int	ft_init(t_philo **ph, t_main_args *args, int i, pthread_mutex_t *d)
 static pthread_t	*ft_initialize_threads(t_main_args *args, t_philo **philos)
 {
 	pthread_t		*ret;
+	pthread_t		*death;
 	t_philo			*ph[3];
 	pthread_mutex_t	*displaying;
 	int				i;
@@ -90,9 +91,14 @@ static pthread_t	*ft_initialize_threads(t_main_args *args, t_philo **philos)
 		ph[0] = ph[2];
 		philos[i] = ph[2];
 	}
+	death = ft_initialize_death_check_thread(philos, args->n_philos, args->t_to_die);
+	if (!death)
+		return (NULL);
 	while (--i >= 0)
 		if (pthread_join(ret[i], NULL))
 			return (ft_free(ret, "Failed to join a thread", NULL));
+	if (pthread_detach(*death))
+		return (NULL);
 	return (ret);
 }
 
@@ -124,7 +130,7 @@ int	main(int argc, char **argv)
 	threads = ft_initialize_threads(main_args, philos);
 	if (!threads)
 		return (-1);
-	free(main_args);
-	free(threads);
+	//free(main_args);
+	//free(threads);
 	return (0);
 }

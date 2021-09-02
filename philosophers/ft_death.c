@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:40:54 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/02 12:13:13 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/02 14:41:33 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,36 +30,41 @@ static void	*ft_check_time_and_death(void *arg)
 	while (1)
 	{
 		i = -1;
+		ft_msleep(5);
 		while (++i < n_philos)
 		{
 			if (ft_get_current_time(philos[i]))
 				return (NULL);
-			current_time = philos[i]->current_time;
-			time_without_eating = current_time - philos[i]->time_last_time_ate;
+			current_time = (philos[i])->current_time - (philos[i])->start_time;
+			time_without_eating = current_time - (philos[i])->time_last_time_ate;
+			//ft_print_mutexed(philos[i], "Time without eating", (int)time_without_eating);
+			//ft_print_mutexed(philos[i], "Time last ate", (int)((philos[i])->time_last_time_ate));
+			//ft_print_mutexed(philos[i], "Current_time", (int)current_time);
 			if ((int)time_without_eating >= philos[i]->t_to_die)
 			{
 				ft_print_status(philos[i], DIED);
-				return (NULL);
+				return (arg);
 			}
 		}
 	}
-	return (death_struct);
+	return (arg);
 }
 
-int	ft_initialize_death_check_thread(t_philo **philos, int n_ph, int t_to_die)
+pthread_t	*ft_initialize_death_check_thread(t_philo **philos, int n_ph, int t_to_die)
 {
-	pthread_t		d_thread;
+	pthread_t		*d_thread;
 	t_death_struct	*d_struct;
 
 	d_struct = malloc(sizeof(t_death_struct));
 	if (!d_struct)
-		return (ft_puterr("Failed to malloc a t_death_struct"));
+		return ((pthread_t *)ft_puterr_ptr("Failed to malloc a t_death_struct"));
+	d_thread = malloc(sizeof(pthread_t));
+	if (!d_thread)
+		return (ft_free(d_struct, "Failed to malloc death_thread", NULL));
 	d_struct->n_philos = n_ph;
 	d_struct->philos = philos;
 	d_struct->t_to_die = t_to_die;
-	if (pthread_create(&d_thread, NULL, &ft_check_time_and_death, d_struct))
-		return (ft_free_int_ret(d_struct, "Faild to create death thread", -1));
-	if (pthread_join(d_thread, NULL))
-		return (ft_free_int_ret(d_struct, "Failed to join death thread", -1));
-	return (0);
+	if (pthread_create(d_thread, NULL, &ft_check_time_and_death, d_struct))
+		return ((pthread_t *)ft_free(d_struct, "Faild to create death thread", NULL));
+	return (d_thread);
 }

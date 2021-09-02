@@ -6,11 +6,25 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 12:03:02 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/02 12:12:49 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/02 14:41:20 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philosophers.h"
+
+int	ft_print_mutexed(t_philo *philo, char *msg, int n)
+{
+	if (pthread_mutex_lock(philo->displaying))
+		return (ft_puterr("Failed to lock display mutex"));
+	ft_putstr_fd("MSG: ", STDOUT);
+	ft_putendl_fd(msg, STDOUT);
+	ft_putstr_fd("N: ", STDOUT);
+	ft_putnbr_fd(n, STDOUT);
+	ft_putchar_fd('\n', STDOUT);
+	if (pthread_mutex_unlock(philo->displaying))
+		return (ft_puterr("Failed to unlock display mutex"));
+	return (0);
+}
 
 /// Prints the message status as required per subject
 /// Ex: "2000 1 is sleeping"
@@ -38,8 +52,9 @@ int	ft_print_status(t_philo *philo, int state)
 		ft_putendl_fd("is thinking", STDOUT);
 	else if (state == DIED)
 		ft_putendl_fd("died", STDOUT);
-	if (pthread_mutex_unlock(philo->displaying))
-		return (ft_puterr("Failed to unlock display mutex"));
+	if (state != DIED)
+		if (pthread_mutex_unlock(philo->displaying))
+			return (ft_puterr("Failed to unlock display mutex"));
 	return (0);
 }
 
