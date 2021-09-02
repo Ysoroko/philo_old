@@ -6,7 +6,7 @@
 #    By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/16 12:05:15 by ysoroko           #+#    #+#              #
-#    Updated: 2021/08/24 14:40:00 by ysoroko          ###   ########.fr        #
+#    Updated: 2021/09/02 11:43:17 by ysoroko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ PHILOS	=	philosophers/ft_thread_function.c \
 			philosophers/ft_time_utils.c \
 			philosophers/ft_states.c \
 			philosophers/ft_forks.c \
+			philosophers/ft_death.c \
 
 SRC		=	$(UTILS) \
 			$(PHILOS) \

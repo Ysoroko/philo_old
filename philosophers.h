@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:20:51 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/25 13:18:53 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/02 12:13:00 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,13 @@ typedef struct s_philo
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	*displaying;
 }	t_philo;
+
+typedef struct s_death_struct
+{
+	int		n_philos;
+	int		t_to_die;
+	t_philo	**philos;
+}	t_death_struct;
 
 /*
 ** MACROS
@@ -105,6 +112,7 @@ int			ft_check_if_philo_died(t_philo *philo);
 int			ft_eat(t_philo *philo);
 int			ft_sleep(t_philo *philo);
 int			ft_think(t_philo *philo);
+int			ft_print_status(t_philo *philo, int state);
 
 /*
 ** DEBUG

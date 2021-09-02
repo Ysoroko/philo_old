@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 12:03:02 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/08/25 11:31:32 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/02 12:12:49 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /// Prints the message status as required per subject
 /// Ex: "2000 1 is sleeping"
 /// Returns 0 in case of success, -1 in case of error
-static	int	ft_print_status(t_philo *philo, int state)
+int	ft_print_status(t_philo *philo, int state)
 {
 	if (pthread_mutex_lock(philo->displaying))
 		return (ft_puterr("Failed to lock display mutex"));
