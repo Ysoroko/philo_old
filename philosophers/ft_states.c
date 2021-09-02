@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 12:03:02 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/02 14:41:20 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/02 16:11:23 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,38 +23,6 @@ int	ft_print_mutexed(t_philo *philo, char *msg, int n)
 	ft_putchar_fd('\n', STDOUT);
 	if (pthread_mutex_unlock(philo->displaying))
 		return (ft_puterr("Failed to unlock display mutex"));
-	return (0);
-}
-
-/// Prints the message status as required per subject
-/// Ex: "2000 1 is sleeping"
-/// Returns 0 in case of success, -1 in case of error
-int	ft_print_status(t_philo *philo, int state)
-{
-	if (pthread_mutex_lock(philo->displaying))
-		return (ft_puterr("Failed to lock display mutex"));
-	if (ft_get_current_time(philo) == -1)
-	{
-		pthread_mutex_unlock(philo->displaying);
-		return (ft_puterr("Failed to get current time"));
-	}
-	ft_putnbr_fd(philo->current_time - philo->start_time, STDOUT);
-	ft_putchar_fd('\t', STDOUT);
-	ft_putnbr_fd(philo->philo_number, STDOUT);
-	ft_putchar_fd('\t', STDOUT);
-	if (state == EATING)
-		ft_putendl_fd("is eating", STDOUT);
-	else if (state == FORK)
-		ft_putendl_fd("has taken a fork", STDOUT);
-	else if (state == SLEEPING)
-		ft_putendl_fd("is sleeping", STDOUT);
-	else if (state == THINKING)
-		ft_putendl_fd("is thinking", STDOUT);
-	else if (state == DIED)
-		ft_putendl_fd("died", STDOUT);
-	if (state != DIED)
-		if (pthread_mutex_unlock(philo->displaying))
-			return (ft_puterr("Failed to unlock display mutex"));
 	return (0);
 }
 
@@ -91,7 +59,7 @@ int	ft_eat(t_philo *philo)
 {
 	int	time_to_eat;
 
-	if (!philo->right_fork)
+	if (philo->n_philos == 1)
 		return (ft_eat_alone(philo));
 	if (pthread_mutex_lock(philo->left_fork))
 		return (ft_puterr("Failed to lock left fork"));

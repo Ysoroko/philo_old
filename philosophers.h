@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:20:51 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/02 15:10:20 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/02 15:38:30 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_philo
 	int				t_to_eat;
 	int				n_to_eat;
 	int				n_times_ate;
+	int				n_philos;
 	suseconds_t		start_time;
 	suseconds_t		current_time;
 	suseconds_t		time_last_time_ate;

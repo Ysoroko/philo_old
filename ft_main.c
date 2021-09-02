@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:04:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/02 15:22:24 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/02 16:10:45 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static pthread_t	*ft_initialize_threads(t_main_args *args, t_philo **philos)
 		(ph[2]->died = died);
 		if (pthread_create(&(ret[i]), NULL, &ft_thread_function, ph[2]))
 			return (ft_free(ret, "Failed to create a thread", NULL));
-		ph[0] = ph[2];
+		ph[1] = ph[2];
 		philos[i] = ph[2];
 	}
 	death = ft_initialize_death_check_thread(philos, args->n_philos, args->t_to_die);

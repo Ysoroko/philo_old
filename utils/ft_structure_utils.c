@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 15:32:17 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/02 15:10:34 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/02 15:39:24 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ t_philo	*ft_initialize_philo(t_main_args *args, int n, t_philo **f)
 	ret->t_to_die = args->t_to_die;
 	ret->t_to_sleep = args->t_to_sleep;
 	ret->t_to_eat = args->t_to_eat;
+	ret->n_philos = args->n_philos;
 	ret->n_to_eat = 0;
 	if (args->n_to_eat)
 		ret->n_to_eat = args->n_to_eat;
