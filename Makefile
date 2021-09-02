@@ -6,7 +6,7 @@
 #    By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/16 12:05:15 by ysoroko           #+#    #+#              #
-#    Updated: 2021/09/02 15:37:28 by ysoroko          ###   ########.fr        #
+#    Updated: 2021/09/02 16:45:26 by ysoroko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,6 +96,10 @@ test1:	all
 # Test 2: no one should die and the philosophers each eats 7 times
 test2:	all
 		./$(EXECUTABLE) 5 800 200 200 7
+
+test2_count:	all
+		./$(EXECUTABLE) 5 800 200 200 7 > test.txt ; grep -o eating test.txt | wc -l ; rm -rf test.txt
+# grep < eating
 
 # Test 3: no one should die
 test3:	all

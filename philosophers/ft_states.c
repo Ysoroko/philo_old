@@ -6,20 +6,25 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 12:03:02 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/02 16:11:23 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/02 16:27:33 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philosophers.h"
 
-int	ft_print_mutexed(t_philo *philo, char *msg, int n)
+int	ft_print_mutexed(t_philo *philo, char *msg, int n, int ph_number)
 {
 	if (pthread_mutex_lock(philo->displaying))
 		return (ft_puterr("Failed to lock display mutex"));
+	ft_putchar_fd('\n', STDOUT);
 	ft_putstr_fd("MSG: ", STDOUT);
 	ft_putendl_fd(msg, STDOUT);
 	ft_putstr_fd("N: ", STDOUT);
 	ft_putnbr_fd(n, STDOUT);
+	ft_putchar_fd('\n', STDOUT);
+	ft_putstr_fd("PH Number: ", STDOUT);
+	ft_putnbr_fd(ph_number, STDOUT);
+	ft_putchar_fd('\n', STDOUT);
 	ft_putchar_fd('\n', STDOUT);
 	if (pthread_mutex_unlock(philo->displaying))
 		return (ft_puterr("Failed to unlock display mutex"));

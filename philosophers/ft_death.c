@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:40:54 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/02 15:35:13 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/02 16:37:22 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,17 @@ static void	*ft_check_time_and_death(void *arg)
 				return (NULL);
 			current_time = (philos[i])->current_time - (philos[i])->start_time;
 			time_without_eating = current_time - (philos[i])->time_last_time_ate;
-			//ft_print_mutexed(philos[i], "Time without eating", (int)time_without_eating);
-			//ft_print_mutexed(philos[i], "Time last ate", (int)((philos[i])->time_last_time_ate));
-			//ft_print_mutexed(philos[i], "Current_time", (int)current_time);
 			if ((int)time_without_eating >= philos[i]->t_to_die)
 			{
+				//ft_print_mutexed(philos[i], "Time without eating", (int)time_without_eating, (philos[i])->philo_number);
+				//ft_print_mutexed(philos[i], "Time last ate", (int)((philos[i])->time_last_time_ate), (philos[i])->philo_number);
+				//ft_print_mutexed(philos[i], "Current_time", (int)current_time, (philos[i])->philo_number);
 				*(philos[i]->died) = 1;
 				ft_print_status(philos[i], DIED);
 				return (arg);
 			}
+			else if (philos[i]->n_times_ate >= philos[i]->n_to_eat)
+				return (arg);
 		}
 	}
 	return (arg);

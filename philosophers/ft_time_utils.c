@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 10:12:48 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/02 16:13:30 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/02 16:30:51 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_get_current_time(t_philo *philo)
 		return (-1);
 	start_time = philo->start_time;
 	in_milliseconds = time_value.tv_usec / 1000 + time_value.tv_sec * 1000;
-	philo->current_time = in_milliseconds - start_time;
+	philo->current_time = in_milliseconds;
 	return (0);
 }
 
@@ -58,12 +58,13 @@ int	ft_msleep(int n_milliseconds)
 int	ft_update_last_time_ate(t_philo *philo)
 {
 	struct timeval	time_value;
-	useconds_t		in_microseconds;
+	useconds_t		in_milliseconds;
 
 	if (gettimeofday(&time_value, NULL) == -1)
 		return (-1);
-	in_microseconds = time_value.tv_usec / 1000;
-	philo->time_last_time_ate = in_microseconds;
+	in_milliseconds = time_value.tv_usec / 1000;
+	philo->time_last_time_ate = in_milliseconds - philo->start_time;
+	//ft_print_mutexed(philo, "Last time ate: ", philo->time_last_time_ate, philo->philo_number);
 	return (0);
 }
 

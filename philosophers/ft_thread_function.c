@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 14:32:41 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/02 16:12:13 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/02 16:21:29 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_print_status(t_philo *philo, int state)
 		pthread_mutex_unlock(philo->displaying);
 		return (ft_puterr("Failed to get current time"));
 	}
-	ft_putnbr_fd(philo->current_time, STDOUT);
+	ft_putnbr_fd(philo->current_time - philo->start_time, STDOUT);
 	ft_putchar_fd('\t', STDOUT);
 	ft_putnbr_fd(philo->philo_number, STDOUT);
 	ft_putchar_fd('\t', STDOUT);
