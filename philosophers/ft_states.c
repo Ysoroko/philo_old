@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 12:03:02 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/03 11:00:52 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/03 11:15:25 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ int	ft_eat(t_philo *philo)
 {
 	int	time_to_eat;
 
-	if (philo->philo_number % 2)
-		ft_msleep(1);
 	if (philo->n_philos == 1)
 		return (ft_eat_alone(philo));
+	if (philo->philo_number % 2 && philo->n_times_ate == 0)
+		ft_msleep(5);
 	if (pthread_mutex_lock(philo->left_fork))
 		return (ft_puterr("Failed to lock left fork"));
 	if (pthread_mutex_lock(philo->right_fork))

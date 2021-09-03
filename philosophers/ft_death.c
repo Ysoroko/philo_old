@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:40:54 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/03 11:01:18 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/03 11:06:50 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	*ft_check_time_and_death(void *arg)
 	while (1)
 	{
 		i = -1;
-		ft_msleep(5);
+		ft_msleep(8);
 		while (++i < n_philos && (!(*philos[i]->died)))
 		{
 			if (ft_get_current_time(philos[i]))
