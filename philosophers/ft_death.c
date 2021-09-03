@@ -6,38 +6,50 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:40:54 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/03 14:26:51 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/03 14:33:54 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philosophers.h"
 
-static int	ft_check_philo_death_and_n_ate(t_philo **philos, int n_philos)
+static int	ft_check_philo_death(t_philo **philos, int i)
 {
-	int				i;
-	int				j;
 	useconds_t		current_time;
 	useconds_t		time_without_eating;
 
+	if (ft_get_current_time(philos[i]))
+		return (-1);
+	current_time = (philos[i])->current_time - (philos[i])->start_time;
+	time_without_eating = current_time - (philos[i])->time_last_time_ate;
+	if ((int)time_without_eating >= philos[i]->t_to_die)
+	{
+		*(philos[i]->died) = 1;
+		ft_print_status(philos[i], DIED);
+		return (1);
+	}
+	return (0);
+}
+
+static int	ft_check_philo_death_and_n_ate(t_philo **philos, int n_philos)
+{
+	int	i;
+	int	j;
+	int	n_to_eat;
+	int	n_times_ate;
+
 	i = -1;
+	n_to_eat = philos[0]->n_to_eat;
 	while (++i < n_philos && (!(*philos[i]->died)))
 	{	
-		if (ft_get_current_time(philos[i]))
+		if (ft_check_philo_death(philos, i))
 			return (1);
-		current_time = (philos[i])->current_time - (philos[i])->start_time;
-		time_without_eating = current_time - (philos[i])->time_last_time_ate;
-		if ((int)time_without_eating >= philos[i]->t_to_die)
-		{
-			*(philos[i]->died) = 1;
-			ft_print_status(philos[i], DIED);
-			return (1);
-		}
 		j = -1;
 		while (++j < n_philos)
 		{
-			if ((philos[j]->n_to_eat) && (philos[j]->n_times_ate) < (philos[j]->n_to_eat))
+			n_times_ate = philos[j]->n_times_ate;
+			if (n_to_eat && n_times_ate < n_to_eat)
 				break ;
-			if ((philos[j]->n_to_eat) && j == n_philos - 1 && (philos[j]->n_times_ate) >= (philos[j]->n_to_eat))
+			if (n_to_eat && j == n_philos - 1 && n_times_ate >= n_to_eat)
 				return (1);
 		}
 	}
