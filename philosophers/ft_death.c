@@ -6,12 +6,14 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:40:54 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/03 14:33:54 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/03 14:38:14 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philosophers.h"
 
+/// This function checks for philosopher's death
+/// Returns 1 in case of death or error, 0 otherwise
 static int	ft_check_philo_death(t_philo **philos, int i)
 {
 	useconds_t		current_time;
@@ -30,6 +32,9 @@ static int	ft_check_philo_death(t_philo **philos, int i)
 	return (0);
 }
 
+/// This function checks both whether a philo has died and if he has eaten
+/// enough times
+/// Returns 1 if he has died/in case of error, 0 otherwise
 static int	ft_check_philo_death_and_n_ate(t_philo **philos, int n_philos)
 {
 	int	i;

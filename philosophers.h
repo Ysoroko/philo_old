@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:20:51 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/03 13:05:44 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/03 15:04:30 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,13 @@
 /// (optionnal) n_to_eat - number of times they need to eat before stopping
 typedef struct s_main_args
 {
-	int	n_philos;
-	int	t_to_die;
-	int	t_to_sleep;
-	int	t_to_eat;
-	int	n_to_eat;
+	int				n_philos;
+	int				t_to_die;
+	int				t_to_sleep;
+	int				t_to_eat;
+	int				n_to_eat;
+	int				*dead;
+	pthread_mutex_t	*displaying;
 }	t_main_args;
 
 typedef struct s_philo
@@ -97,6 +99,8 @@ int			ft_isnum(char c);
 void		*ft_free(void *to_free, char *error_msg, void *to_return);
 int			ft_free_int_ret(void *to_free, char *error_msg, int to_return);
 void		*ft_malloc(int size, void **malloc_this);
+int			ft_main_args_error(int argc, char **argv);
+pthread_mutex_t	*ft_initialize_display_mutex(void);
 
 t_main_args	*ft_initialize_main_args_struct(int argc, char **argv);
 t_philo		*ft_initialize_philo(t_main_args *args, int n, t_philo **f);

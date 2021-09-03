@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 15:32:17 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/03 13:06:24 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/03 14:59:04 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,16 @@ t_main_args	*ft_initialize_main_args_struct(int argc, char **argv)
 	ret->t_to_eat = (int)(ft_atol(argv[3]));
 	ret->t_to_sleep = (int)(ft_atol(argv[4]));
 	ret->n_to_eat = 0;
+	ret->dead = malloc(sizeof(int));
+	if (!ret)
+		return (ft_free(ret, "Failed to malloc \"dead\"", NULL));
+	ret->displaying = ft_initialize_display_mutex();
+	if (!(ret->displaying))
+	{
+		ft_free(ret->dead, NULL, NULL);
+		return (ft_free(ret, NULL, NULL));
+	}
+	*(ret->dead) = 0;
 	if (argc == 6)
 		ret->n_to_eat = (int)(ft_atol(argv[5]));
 	return (ret);
