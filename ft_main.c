@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:04:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/02 16:10:45 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/03 12:04:05 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,19 +121,17 @@ int	main(int argc, char **argv)
 
 	if (ft_main_args_error(argc, argv))
 		return (-1);
-	// PHILOS TO BE MALLOC'D HERE
 	philos = malloc(sizeof(t_philo *) * ft_atol(argv[1]));
 	if (!philos)
 		return (ft_puterr("Failed to malloc the philosophers array"));
 	main_args = ft_initialize_main_args_struct(argc, argv);
 	if (!main_args)
 		return (ft_free_int_ret(philos, NULL, -1));
-	//if (!philos)
-	//	return (ft_puterr("Couldn't malloc philos array"));
 	threads = ft_initialize_threads(main_args, philos);
 	if (!threads)
 		return (-1);
-	//free(main_args);
-	//free(threads);
+	free(main_args);
+	free(threads);
+	free(philos);
 	return (0);
 }

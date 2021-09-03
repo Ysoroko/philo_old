@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 10:12:48 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/02 16:30:51 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/03 13:08:29 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	ft_update_last_time_ate(t_philo *philo)
 		return (-1);
 	in_milliseconds = time_value.tv_usec / 1000;
 	philo->time_last_time_ate = in_milliseconds - philo->start_time;
-	//ft_print_mutexed(philo, "Last time ate: ", philo->time_last_time_ate, philo->philo_number);
 	return (0);
 }
 

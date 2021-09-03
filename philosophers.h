@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:20:51 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/02 16:24:07 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/03 13:05:44 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,8 @@ int			ft_sleep(t_philo *philo);
 int			ft_think(t_philo *philo);
 int			ft_print_status(t_philo *philo, int state);
 
-pthread_t	*ft_initialize_death_check_thread(t_philo **philos, int n_ph, int t_to_die);
+pthread_t	*ft_initialize_death_check_thread(t_philo **philos, int n_ph,
+				int t_to_die);
 
 /*
 ** DEBUG

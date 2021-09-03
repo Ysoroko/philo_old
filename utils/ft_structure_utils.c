@@ -6,45 +6,47 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 15:32:17 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/02 15:39:24 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/03 13:06:24 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philosophers.h"
 
-/// Prints the values of the t_main_args structure
-void	ft_print_main_args(t_main_args *main_args)
-{
-	printf("N Philos: [%d]\n", main_args->n_philos);
-	printf("Time to die: [%d]\n", main_args->t_to_die);
-	printf("Time to eat: [%d]\n", main_args->t_to_eat);
-	printf("Time to sleep: [%d]\n", main_args->t_to_sleep);
-	printf("Number to eat: [%d]\n", main_args->n_to_eat);
-}
+/* /// Prints the values of the t_main_args structure
+** void	ft_print_main_args(t_main_args *main_args)
+** {
+** 	printf("N Philos: [%d]\n", main_args->n_philos);
+** 	printf("Time to die: [%d]\n", main_args->t_to_die);
+** 	printf("Time to eat: [%d]\n", main_args->t_to_eat);
+** 	printf("Time to sleep: [%d]\n", main_args->t_to_sleep);
+** 	printf("Number to eat: [%d]\n", main_args->n_to_eat);
+** }
+*/
 
-/// Prints the values of t_philo structure
-void	ft_print_philo(t_philo	*philo, int with_mutex)
-{
-	if (with_mutex)
-		pthread_mutex_lock(philo->displaying);
-	printf("\n\n\n");
-	printf("______________________________________________________________\n");
-	printf("Philo number: [%d]\n", philo->philo_number);
-	printf("Time to die: [%d]\n", philo->t_to_die);
-	printf("Time to sleep: [%d]\n", philo->t_to_sleep);
-	printf("Time to eat: [%d]\n", philo->t_to_eat);
-	printf("N to eat: [%d]\n", philo->n_to_eat);
-	printf("N_times_ate: [%d]\n", philo->n_times_ate);
-	printf("Start time: [%d]\n", philo->start_time);
-	printf("Current time: [%d]\n", philo->current_time);
-	printf("N seconds without eating: [%d]\n", philo->time_last_time_ate);
-	printf("Left fork address: [%p]\n", philo->left_fork);
-	printf("Right fork address: [%p]\n", philo->right_fork);
-	printf("\n_______________________________________________________________");
-	printf("\n\n\n");
-	if (with_mutex)
-		pthread_mutex_unlock(philo->displaying);
-}
+/* /// Prints the values of t_philo structure
+** void	ft_print_philo(t_philo	*philo, int with_mutex)
+** {
+** 	if (with_mutex)
+** 		pthread_mutex_lock(philo->displaying);
+** 	printf("\n\n\n");
+** 	printf("______________________________________________________________\n");
+** 	printf("Philo number: [%d]\n", philo->philo_number);
+** 	printf("Time to die: [%d]\n", philo->t_to_die);
+** 	printf("Time to sleep: [%d]\n", philo->t_to_sleep);
+** 	printf("Time to eat: [%d]\n", philo->t_to_eat);
+** 	printf("N to eat: [%d]\n", philo->n_to_eat);
+** 	printf("N_times_ate: [%d]\n", philo->n_times_ate);
+** 	printf("Start time: [%d]\n", philo->start_time);
+** 	printf("Current time: [%d]\n", philo->current_time);
+** 	printf("N seconds without eating: [%d]\n", philo->time_last_time_ate);
+** 	printf("Left fork address: [%p]\n", philo->left_fork);
+** 	printf("Right fork address: [%p]\n", philo->right_fork);
+** 	printf("\n_______________________________________________________________");
+** 	printf("\n\n\n");
+** 	if (with_mutex)
+** 		pthread_mutex_unlock(philo->displaying);
+** }
+*/
 
 /// Create a new t_main_args structure using malloc and set up its values.
 /// Returns a NULL pointer if the malloc call fails
