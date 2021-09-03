@@ -6,7 +6,7 @@
 #    By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/16 12:05:15 by ysoroko           #+#    #+#              #
-#    Updated: 2021/09/03 14:53:57 by ysoroko          ###   ########.fr        #
+#    Updated: 2021/09/03 15:10:35 by ysoroko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,6 +90,9 @@ re:		fclean all
 # 4 - time to sleep
 # (optionnal) 5 - number of times they need to eat
 
+test_one_philo: all
+		./$(EXECUTABLE) 1 800 200 200
+
 # Test 1: no one should die
 test1:	all
 		./$(EXECUTABLE) 5 800 200 200
@@ -100,7 +103,6 @@ test2:	all
 
 test2_count:
 		make test2 | grep eating | wc -l
-# grep < eating
 
 # Test 3: no one should die
 test3:	all
