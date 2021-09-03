@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 12:03:02 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/03 11:15:25 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/03 11:58:37 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,27 @@ static int	ft_eat_alone(t_philo *philo)
 	return (0);
 }
 
+static int	ft_lock_forks(t_philo *philo)
+{
+	if (philo->philo_number % 2)
+	{
+		if (philo->n_times_ate == 0)
+			ft_msleep(5);
+		if (pthread_mutex_lock(philo->left_fork) || ft_print_status(philo, FORK))
+			return (ft_puterr("Failed to lock left fork"));
+		if (pthread_mutex_lock(philo->right_fork) || ft_print_status(philo, FORK))
+			return (ft_puterr("Failed to lock right fork"));
+	}
+	else if (!(philo->philo_number % 2))
+	{
+		if (pthread_mutex_lock(philo->right_fork) || ft_print_status(philo, FORK))
+			return (ft_puterr("Failed to lock left fork"));
+		if (pthread_mutex_lock(philo->left_fork) || ft_print_status(philo, FORK))
+			return (ft_puterr("Failed to lock right fork"));
+	}
+	return (0);
+}
+
 /// Philosopher's "eating" state
 /// The philosopher will take his 2 forks if available and start eating
 /// Displays a message for each fork taken and when he starts to eat
@@ -66,13 +87,7 @@ int	ft_eat(t_philo *philo)
 
 	if (philo->n_philos == 1)
 		return (ft_eat_alone(philo));
-	if (philo->philo_number % 2 && philo->n_times_ate == 0)
-		ft_msleep(5);
-	if (pthread_mutex_lock(philo->left_fork))
-		return (ft_puterr("Failed to lock left fork"));
-	if (pthread_mutex_lock(philo->right_fork))
-		return (ft_puterr("Failed to lock right fork"));
-	if (ft_print_status(philo, FORK) || ft_print_status(philo, FORK))
+	if (ft_lock_forks(philo))
 		return (-1);
 	time_to_eat = philo->t_to_eat;
 	if (ft_get_current_time(philo) == -1)

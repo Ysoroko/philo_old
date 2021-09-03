@@ -6,7 +6,7 @@
 #    By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/16 12:05:15 by ysoroko           #+#    #+#              #
-#    Updated: 2021/09/02 16:52:57 by ysoroko          ###   ########.fr        #
+#    Updated: 2021/09/03 11:55:21 by ysoroko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,6 +109,16 @@ test3:	all
 test4:	all
 		./$(EXECUTABLE) 4 310 200 100
 
+test_min: all
+		./$(EXECUTABLE) 2 130 60 60
+
+test_min_d: all
+		./$(EXECUTABLE) 2 120 60 60
+
+test_max: all
+		./$(EXECUTABLE) 200 800 200 200
 # -------------------------------------------------------------------
 
 .PHONY:	all clean fclean re
+
+#2578 - 2448
