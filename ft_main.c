@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:04:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/03 15:03:59 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/03 15:06:38 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /// Initializes the "display" mutex
 /// Returns the mutex or a NULL pointer in case of an error
-pthread_mutex_t	*ft_initialize_display_mutex(void)
+void	*ft_initialize_display_mutex(void)
 {
 	pthread_mutex_t	*displaying;
 
@@ -59,20 +59,20 @@ void	*ft_ph(t_philo **ph, t_main_args *arg, pthread_t *r, t_philo **p)
 /// Initialize an array of threads of n_philos elements with malloc
 /// Creates a thread for every philosopher and joins the threads
 /// Returns a NULL pointer in case of an error
-static pthread_t	*ft_initialize_threads(t_main_args *args, t_philo **p)
+static pthread_t	*ft_initialize_threads(t_main_args *arg, t_philo **p)
 {
 	pthread_t		*ret;
 	pthread_t		*death;
 	t_philo			*ph[3];
 	int				i;
 
-	if (!ft_malloc(sizeof(*ret) * args->n_philos, (void **)&ret))
+	if (!ft_malloc(sizeof(*ret) * arg->n_philos, (void **)&ret))
 		return (ft_puterr_ptr("Failed to malloc the philosophers"));
-	i = args->n_philos;
+	i = arg->n_philos;
 	ph[0] = NULL;
-	if (!ft_ph(ph, args, ret, p))
+	if (!ft_ph(ph, arg, ret, p))
 		return (NULL);
-	death = ft_initialize_death_check_thread(p, args->n_philos, args->t_to_die);
+	death = ft_initialize_death_check_thread(p, arg->n_philos, arg->t_to_die);
 	if (!death)
 		return (NULL);
 	while (--i >= 0)

@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 15:32:17 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/03 14:59:04 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/03 15:06:26 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_main_args	*ft_initialize_main_args_struct(int argc, char **argv)
 	ret->dead = malloc(sizeof(int));
 	if (!ret)
 		return (ft_free(ret, "Failed to malloc \"dead\"", NULL));
-	ret->displaying = ft_initialize_display_mutex();
+	ret->displaying = (pthread_mutex_t *)ft_initialize_display_mutex();
 	if (!(ret->displaying))
 	{
 		ft_free(ret->dead, NULL, NULL);
