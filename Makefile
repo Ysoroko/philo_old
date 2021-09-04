@@ -6,7 +6,7 @@
 #    By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/16 12:05:15 by ysoroko           #+#    #+#              #
-#    Updated: 2021/09/03 15:10:35 by ysoroko          ###   ########.fr        #
+#    Updated: 2021/09/04 12:22:25 by ysoroko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,11 +64,6 @@ $(NAME): $(OBJS)
 		@$(GCC) $(FLAGS) $(OBJS) -o $(EXECUTABLE)
 		@$(COMPILED)
 
-wrun:
-		@$(COMP_START)
-		@$(GCC) $(SRC) -o $(EXECUTABLE)
-		@$(COMPILED)
-
 clean:
 		@rm -rf $(OBJS)
 		@$(CLEANED)
@@ -122,4 +117,4 @@ test_max: all
 		./$(EXECUTABLE) 200 800 200 200
 # -------------------------------------------------------------------
 
-.PHONY:	all clean fclean re
+.PHONY:	all clean fclean re test_one_philo test1 test2 test2_count test3 test4 test_min test_min_d test_max
