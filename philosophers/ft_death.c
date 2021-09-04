@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:40:54 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/03 14:38:14 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/04 11:22:38 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,35 @@ static int	ft_check_philo_death_and_n_ate(t_philo **philos, int n_philos)
 	return (0);
 }
 
+/// Function called to clean up the memory
+/// To clean up:
+/// 1) Free the address of left fork
+/// 2) Destroy the mutex of the same left fork
+///	3) Free the address of the "displaying" mutex (once for all the philos)
+/// 4) Destroy the mutex of "displaying" mutex (once for all the philos)
+/// 5) Free int *died (once for all the philos)
+/// 5) Free t_philo structure itself (not needed, done automatically)
+static int	ft_cleanup_threads_and_mutexes(t_philo **philos, int n_philos)
+{
+	int	i;
+
+	i = -1;
+	if (pthread_mutex_destroy(philos[0]->displaying))
+		return (-1);
+	free(philos[0]->displaying);
+	free(philos[0]->died);
+	while (++i < n_philos)
+	{
+		if (pthread_mutex_destroy(philos[i]->left_fork))
+			return (-1);
+		free(philos[i]->left_fork);
+	}
+	return (0);
+}
+
 /// This is a thread function which will check the current time for every
 /// philosopher and check if the philosopher has died
-///
+/// Returns 
 static void	*ft_check_time_and_death(void *arg)
 {
 	t_death_struct	*death_struct;
@@ -77,7 +103,10 @@ static void	*ft_check_time_and_death(void *arg)
 	{
 		ft_msleep(1);
 		if (ft_check_philo_death_and_n_ate(philos, n_philos))
-			return (arg);
+		{
+			ft_cleanup_threads_and_mutexes(philos, n_philos);
+			return (NULL);
+		}
 	}
 	return (arg);
 }

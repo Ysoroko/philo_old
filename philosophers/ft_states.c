@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 12:03:02 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/03 13:08:12 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/04 11:07:06 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ static int	ft_eat_alone(t_philo *philo)
 	return (0);
 }
 
+/// This function will lock forks differently depending on the philo's number
+/// Odd philosophers will take left fork first, then right
+/// Even philosophers will take right fork first, then left
+/// This is done to avoid the death lock
 static int	ft_lock_forks(t_philo *ph)
 {
 	if (ph->philo_number % 2)
