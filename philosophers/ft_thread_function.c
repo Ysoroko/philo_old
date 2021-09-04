@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 14:32:41 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/04 11:18:55 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/04 11:58:25 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,5 @@ void	*ft_thread_function(void *arg)
 	if (ft_setup_start_time(philo) == -1)
 		return (NULL);
 	ft_philo_routine(philo);
-	free(philo);
 	return (NULL);
 }

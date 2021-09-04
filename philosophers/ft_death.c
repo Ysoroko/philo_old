@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:40:54 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/04 11:22:38 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/04 12:00:25 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int	ft_check_philo_death_and_n_ate(t_philo **philos, int n_philos)
 ///	3) Free the address of the "displaying" mutex (once for all the philos)
 /// 4) Destroy the mutex of "displaying" mutex (once for all the philos)
 /// 5) Free int *died (once for all the philos)
-/// 5) Free t_philo structure itself (not needed, done automatically)
+/// 5) Free t_philo structure itself
 static int	ft_cleanup_threads_and_mutexes(t_philo **philos, int n_philos)
 {
 	int	i;
@@ -83,6 +83,7 @@ static int	ft_cleanup_threads_and_mutexes(t_philo **philos, int n_philos)
 		if (pthread_mutex_destroy(philos[i]->left_fork))
 			return (-1);
 		free(philos[i]->left_fork);
+		free(philos[i]);
 	}
 	return (0);
 }
