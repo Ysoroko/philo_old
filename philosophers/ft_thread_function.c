@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 14:32:41 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/04 11:58:25 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/04 12:18:16 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ int	ft_print_status(t_philo *philo, int state)
 	if (pthread_mutex_lock(philo->displaying))
 		return (ft_puterr("Failed to lock display mutex"));
 	if (ft_get_current_time(philo) == -1)
-	{
-		pthread_mutex_unlock(philo->displaying);
 		return (ft_puterr("Failed to get current time"));
-	}
 	ft_putnbr_fd(philo->current_time - philo->start_time, STDOUT);
 	ft_putchar_fd('\t', STDOUT);
 	ft_putnbr_fd(philo->philo_number, STDOUT);
@@ -71,8 +68,13 @@ void	*ft_thread_function(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	if (!philo->left_fork || !philo->right_fork)
+	{
+		while (!philo->left_fork || !philo->right_fork)
+			usleep(1);
+	}
 	if (ft_setup_start_time(philo) == -1)
 		return (NULL);
 	ft_philo_routine(philo);
-	return (NULL);
+	return (philo);
 }
