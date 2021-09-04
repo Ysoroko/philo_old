@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 14:32:41 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/04 12:18:16 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/04 12:34:29 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	*ft_thread_function(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	if (!philo->left_fork || !philo->right_fork)
+	if (philo->n_philos != 1 && (!philo->left_fork || !philo->right_fork))
 	{
 		while (!philo->left_fork || !philo->right_fork)
 			usleep(1);
