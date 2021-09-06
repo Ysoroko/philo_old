@@ -6,7 +6,7 @@
 #    By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/16 12:05:15 by ysoroko           #+#    #+#              #
-#    Updated: 2021/09/06 11:06:31 by ysoroko          ###   ########.fr        #
+#    Updated: 2021/09/06 15:22:02 by ysoroko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,6 +106,12 @@ test3:	all
 # Test 4: A philosopher should die
 test4:	all
 		./$(EXECUTABLE) 4 310 200 100
+
+test5:	all
+		./$(EXECUTABLE) 50 410 200 200
+
+test6:	all
+		./$(EXECUTABLE) 200 410 200 200
 
 test_min: all
 		./$(EXECUTABLE) 2 130 60 60
