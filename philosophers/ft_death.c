@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:40:54 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/06 10:53:41 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/06 15:36:11 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,10 @@ static void	*ft_check_time_and_death(void *arg)
 	n_philos = death_struct->n_philos;
 	while (1)
 	{
-		ft_msleep(1);
 		if (ft_check_philo_death_and_n_ate(philos, n_philos))
 		{
 			ft_cleanup_threads_and_mutexes(philos, n_philos);
+			free(death_struct);
 			return (NULL);
 		}
 	}
