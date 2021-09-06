@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 12:03:02 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/06 16:57:48 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/06 17:33:23 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	ft_lock_forks(t_philo *ph)
 	if (ph->philo_number % 2)
 	{
 		if (ph->n_times_ate == 0)
-			ft_msleep(5);
+			ft_msleep(3);
 		if (pthread_mutex_lock(ph->left_fork) || ft_print_status(ph, FORK))
 			return (ft_puterr("Failed to lock left fork"));
 		if (pthread_mutex_lock(ph->right_fork) || ft_print_status(ph, FORK))
@@ -90,23 +90,26 @@ static int	ft_lock_forks(t_philo *ph)
 /// Returns 0 in case of success, -1 in case of error
 int	ft_eat(t_philo *philo)
 {
-	int	time_to_eat;
-
 	if (philo->n_philos == 1)
 		return (ft_eat_alone(philo));
 	if (ft_lock_forks(philo))
 		return (-1);
-	time_to_eat = philo->t_to_eat;
-	if (ft_get_current_time(philo) == -1)
-		return (ft_puterr("Failed to get current time"));
 	if (ft_print_status(philo, EATING))
 		return (-1);
 	if (ft_msleep(philo->t_to_eat) == -1)
 		return (ft_puterr("Failed to call usleep function"));
-	if (pthread_mutex_unlock(philo->left_fork))
-		return (ft_puterr("Failed to unlock left fork"));
-	if (pthread_mutex_unlock(philo->right_fork))
-		return (ft_puterr("Failed to unlock right fork"));
+	if (philo->philo_number % 2)
+	{
+		if (pthread_mutex_unlock(philo->left_fork)
+			|| pthread_mutex_unlock(philo->right_fork))
+			return (ft_puterr("Failed to unlock the forks"));
+	}
+	else
+	{
+		if (pthread_mutex_unlock(philo->right_fork)
+			|| pthread_mutex_unlock(philo->left_fork))
+			return (ft_puterr("Failed to unlock the forks"));
+	}
 	if (ft_update_last_time_ate(philo))
 		return (ft_puterr("Couldn't update last time the philosopher ate"));
 	philo->n_times_ate++;
