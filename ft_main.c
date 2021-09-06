@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:04:33 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/04 12:29:14 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/06 11:03:29 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	*ft_ph(t_philo **ph, t_main_args *arg, pthread_t *r, t_philo **p)
 		ph[1] = ph[2];
 		p[i] = ph[2];
 	}
+	*(p[0])->died = 0;
 	return (p);
 }
 
