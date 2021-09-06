@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 12:03:02 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/06 10:52:09 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/06 16:57:48 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,8 +134,6 @@ int	ft_sleep(t_philo *philo)
 int	ft_think(t_philo *philo)
 {
 	if (ft_print_status(philo, THINKING))
-		return (-1);
-	if (ft_msleep(5))
 		return (-1);
 	return (0);
 }
