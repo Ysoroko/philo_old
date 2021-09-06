@@ -6,12 +6,13 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 14:32:41 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/06 16:43:26 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/06 16:56:30 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philosophers.h"
 
+/// Joins pref and suff and returns the result of the malloc'd copy
 static char	*ft_strjoin(char const *pref, char const *suff)
 {
 	char	*ret;
@@ -41,6 +42,8 @@ static char	*ft_strjoin(char const *pref, char const *suff)
 	return (ret);
 }
 
+/// Creates a temporary buffer with the message and prints it to the output.
+/// Is more optimal than using printf or multiple calls to write.
 static int	ft_message_to_print(t_philo *philo, char *state_msg)
 {
 	char	*msg1;
