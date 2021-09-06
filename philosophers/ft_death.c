@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:40:54 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/06 15:37:53 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/06 16:33:43 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ static int	ft_cleanup_threads_and_mutexes(t_philo **philos, int n_philos)
 		if (pthread_mutex_destroy(philos[i]->left_fork))
 			return (-1);
 		free(philos[i]->left_fork);
+		free(philos[i]->ph_num);
 		free(philos[i]);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 #    By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/16 12:05:15 by ysoroko           #+#    #+#              #
-#    Updated: 2021/09/06 15:22:02 by ysoroko          ###   ########.fr        #
+#    Updated: 2021/09/06 16:30:44 by ysoroko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ UTILS	=	utils/ft_output_utils.c \
 			utils/ft_strings_utils.c \
 			utils/ft_structure_utils.c \
 			utils/ft_main_utils.c \
+			utils/ft_itoa.c \
 
 PHILOS	=	philosophers/ft_thread_function.c \
 			philosophers/ft_time_utils.c \

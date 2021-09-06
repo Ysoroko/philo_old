@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:20:51 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/03 15:06:34 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/06 16:31:47 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_main_args
 typedef struct s_philo
 {
 	int				philo_number;
+	char			*ph_num;
 	int				t_to_die;
 	int				t_to_sleep;
 	int				t_to_eat;
@@ -101,6 +102,7 @@ int			ft_free_int_ret(void *to_free, char *error_msg, int to_return);
 void		*ft_malloc(int size, void **malloc_this);
 int			ft_main_args_error(int argc, char **argv);
 void		*ft_initialize_display_mutex(void);
+char		*ft_itoa(int n);
 
 t_main_args	*ft_initialize_main_args_struct(int argc, char **argv);
 t_philo		*ft_initialize_philo(t_main_args *args, int n, t_philo **f);

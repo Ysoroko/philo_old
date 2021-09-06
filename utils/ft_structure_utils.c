@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 15:32:17 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/09/06 10:40:55 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/09/06 16:33:16 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,9 @@ t_philo	*ft_initialize_philo(t_main_args *args, int n, t_philo **f)
 	if (!ret)
 		return (NULL);
 	ret->philo_number = n;
+	ret->ph_num = ft_itoa(n);
+	if (!ret->ph_num)
+		return (ft_free(ret, "Failed to itoa philo num", NULL));
 	ret->t_to_die = args->t_to_die;
 	ret->t_to_sleep = args->t_to_sleep;
 	ret->t_to_eat = args->t_to_eat;
